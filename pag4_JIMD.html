@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Herramientas de IA</title>
+    <style>
+        html {
+            scroll-behavior: smooth;
+        }
+        body { 
+            font-family: 'Segoe UI', Arial, sans-serif; 
+            margin: 0; 
+            padding: 0; 
+            background: linear-gradient(135deg, #0d47a1, #4a148c); 
+            color: #333; 
+            line-height: 1.6;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 40px;
+            background-color: rgba(255, 255, 255, 0.9);
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
+            border-radius: 10px;
+            margin-top: 30px;
+            margin-bottom: 30px;
+        }
+        header {
+            background: linear-gradient(to right, #0d47a1, #4a148c);
+            padding: 20px;
+            text-align: center;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+        }
+        h1 { 
+            color: white; 
+            margin: 0; 
+            text-align: center; 
+            font-size: 2.5em;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+        }
+        h2 {
+            color: #4a148c;
+            border-bottom: 2px solid #4a148c;
+            padding-bottom: 10px;
+            margin-top: 30px;
+            position: relative;
+            overflow: hidden;
+        }
+        h2::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background-color: #0d47a1;
+            transition: width 0.5s ease;
+        }
+        h2:hover::after {
+            width: 100%;
+        }
+        .section {
+            background-color: rgba(255, 255, 255, 0.8);
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            border-left: 5px solid #0d47a1;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            animation: fadeIn 0.8s ease-out forwards;
+        }
+        .section:hover {
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+            transform: translateY(-3px);
+        }
+        .section:nth-child(odd) {
+            border-left-color: #4a148c;
+        }
+        img {
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+            margin: 15px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            border: 3px solid #4a148c;
+            padding: 5px;
+            background: linear-gradient(45deg, rgba(13, 71, 161, 0.1), rgba(74, 20, 140, 0.1));
+            max-width: 100%;
+            height: auto;
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        img:hover {
+            transform: scale(1.03);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.5);
+            border-color: #0d47a1;
+        }
+        a {
+            color: #0d47a1;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            padding: 2px 5px;
+            border-radius: 3px;
+        }
+        a:hover {
+            color: #4a148c;
+            background-color: rgba(13, 71, 161, 0.1);
+            text-decoration: none;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        .nav-menu {
+            background-color: rgba(13, 71, 161, 0.8);
+            padding: 15px;
+            border-radius: 8px;
+            margin: 20px 0;
+            text-align: center;
+        }
+        .nav-menu a {
+            color: white;
+            margin: 0 15px;
+            padding: 8px 15px;
+            border-radius: 5px;
+            background-color: rgba(74, 20, 140, 0.7);
+            display: inline-block;
+            font-weight: bold;
+            transition: all 0.3s ease;
+        }
+        .nav-menu a:hover {
+            background-color: rgba(255, 255, 255, 0.2);
+            transform: translateY(-3px);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+        .tool-card {
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            padding: 15px;
+            margin: 15px 0;
+            background-color: white;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+        }
+        .tool-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+        footer {
+            background: linear-gradient(to right, #4a148c, #0d47a1);
+            color: white;
+            text-align: center;
+            padding: 20px;
+            margin-top: 30px;
+            border-radius: 0 0 10px 10px;
+        }
+        footer a {
+            color: white;
+            text-decoration: underline;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Herramientas de IA para Programación</h1>
+    </header>
+    
+    <div class="container">
+        <div class="nav-menu">
+            <a href="DANDOFORMAALTEMADELDOCUMENTOHTML_JIMD.html">Inicio</a>
+            <a href="pag2_JIMD.html">HTML Básico</a>
+            <a href="pag3_JIMD.html">IA en Desarrollo Web</a>
+        </div>
+
+        <div class="section">
+            <h2>Herramientas de IA para Programadores</h2>
+            <p>
+                La inteligencia artificial ha revolucionado el mundo de la programación con herramientas que aumentan la productividad, mejoran la calidad del código y facilitan tareas complejas. Estas son algunas de las herramientas más destacadas que todo programador debería conocer.
+            </p>
+            <img src="https://cdn-icons-png.flaticon.com/512/2721/2721280.png" alt="Herramientas de IA" width="200">
+        </div>
+
+        <div class="section">
+            <h2>Asistentes de Código</h2>
+            
+            <div class="tool-card">
+                <h3>GitHub Copilot</h3>
+                <p>
+                    Desarrollado por GitHub y OpenAI, Copilot es un asistente de programación que sugiere líneas de código o funciones completas mientras escribes. Utiliza el modelo Codex de OpenAI, entrenado con miles de millones de líneas de código público.
+                </p>
+                <p><strong>Características principales:</strong></p>
+                <ul>
+                    <li>Autocompletado de código inteligente</li>
+                    <li>Generación de funciones completas</li>
+                    <li>Soporte para múltiples lenguajes de programación</li>
+                    <li>Integración con IDEs populares como VS Code</li>
+                </ul>
+            </div>
+            
+            <div class="tool-card">
+                <h3>Tabnine</h3>
+                <p>
+                    Tabnine es una herramienta de autocompletado de código basada en IA que aprende de tu estilo de codificación para ofrecer sugerencias más personalizadas. Está disponible como plugin para la mayoría de los editores de código populares.
+                </p>
+            </div>
+            
+            <div class="tool-card">
+                <h3>Kite</h3>
+                <p>
+                    Kite utiliza aprendizaje automático para proporcionar completado de código inteligente en tiempo real. Se integra con múltiples IDEs y ofrece documentación contextual mientras programas.
+                </p>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>Herramientas de Depuración y Análisis</h2>
+            
+            <div class="tool-card">
+                <h3>DeepCode</h3>
+                <p>
+                    DeepCode utiliza IA para analizar tu código y encontrar errores, vulnerabilidades de seguridad y problemas de rendimiento. Aprende de millones de commits para ofrecer sugerencias de alta calidad.
+                </p>
+            </div>
+            
+            <div class="tool-card">
+                <h3>CodeGuru</h3>
+                <p>
+                    Desarrollado por Amazon, CodeGuru utiliza machine learning para revisar código y proporcionar recomendaciones para mejorar la calidad y el rendimiento, especialmente en aplicaciones Java.
+                </p>
+            </div>
+            
+            <img src="https://cdn-icons-png.flaticon.com/512/1693/1693746.png" alt="Depuración con IA" width="200">
+        </div>
+
+        <div class="section">
+            <h2>Generadores de Código</h2>
+            
+            <div class="tool-card">
+                <h3>ChatGPT</h3>
+                <p>
+                    Aunque no es específicamente una herramienta de programación, ChatGPT puede generar código a partir de descripciones en lenguaje natural, explicar conceptos de programación y ayudar a resolver problemas de código.
+                </p>
+            </div>
+            
+            <div class="tool-card">
+                <h3>Replit Ghostwriter</h3>
+                <p>
+                    Ghostwriter es una herramienta de IA integrada en Replit que puede generar código, explicar código existente y ayudar a depurar problemas.
+                </p>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>Herramientas de Optimización</h2>
+            
+            <div class="tool-card">
+                <h3>AI-Powered Code Review</h3>
+                <p>
+                    Herramientas como SonarQube con capacidades de IA pueden analizar automáticamente tu código para detectar problemas de calidad, seguridad y mantenibilidad.
+                </p>
+            </div>
+            
+            <div class="tool-card">
+                <h3>Codota</h3>
+                <p>
+                    Codota aprende de millones de programas para ayudarte a codificar más rápido con sugerencias relevantes basadas en tu contexto de código.
+                </p>
+            </div>
+            
+            <img src="https://cdn-icons-png.flaticon.com/512/2920/2920349.png" alt="Optimización de código" width="200">
+        </div>
+    </div>
+
+    <footer>
+        <p>&copy; 2023 Herramientas de IA para Programación | Diseñado con ❤️ y tecnología</p>
+        <p><a href="DANDOFORMAALTEMADELDOCUMENTOHTML_JIMD.html">Volver a la página principal</a></p>
+    </footer>
+
+    <a href="#" id="back-to-top" style="position: fixed; bottom: 20px; right: 20px; background: linear-gradient(to right, #0d47a1, #4a148c); color: white; width: 50px; height: 50px; text-align: center; line-height: 50px; border-radius: 50%; text-decoration: none; box-shadow: 0 2px 5px rgba(0,0,0,0.3); display: none; font-size: 20px;">↑</a>
+    <script>
+    // Botón para volver arriba
+    window.onscroll = function() {scrollFunction()};
+
+    function scrollFunction() {
+      if (document.body.scrollTop > 300 || document.documentElement.scrollTop > 300) {
+        document.getElementById("back-to-top").style.display = "block";
+      } else {
+        document.getElementById("back-to-top").style.display = "none";
+      }
+    }
+    </script>
+</body>
+</html>

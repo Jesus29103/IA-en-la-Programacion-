@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IA en Desarrollo Web</title>
+    <style>
+        html {
+            scroll-behavior: smooth;
+        }
+        body { 
+            font-family: 'Segoe UI', Arial, sans-serif; 
+            margin: 0; 
+            padding: 0; 
+            background: linear-gradient(135deg, #0d47a1, #4a148c); 
+            color: #333; 
+            line-height: 1.6;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 40px;
+            background-color: rgba(255, 255, 255, 0.9);
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
+            border-radius: 10px;
+            margin-top: 30px;
+            margin-bottom: 30px;
+        }
+        header {
+            background: linear-gradient(to right, #0d47a1, #4a148c);
+            padding: 20px;
+            text-align: center;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+        }
+        h1 { 
+            color: white; 
+            margin: 0; 
+            text-align: center; 
+            font-size: 2.5em;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+        }
+        h2 {
+            color: #4a148c;
+            border-bottom: 2px solid #4a148c;
+            padding-bottom: 10px;
+            margin-top: 30px;
+            position: relative;
+            overflow: hidden;
+        }
+        h2::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background-color: #0d47a1;
+            transition: width 0.5s ease;
+        }
+        h2:hover::after {
+            width: 100%;
+        }
+        .section {
+            background-color: rgba(255, 255, 255, 0.8);
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            border-left: 5px solid #0d47a1;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            animation: fadeIn 0.8s ease-out forwards;
+        }
+        .section:hover {
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+            transform: translateY(-3px);
+        }
+        .section:nth-child(odd) {
+            border-left-color: #4a148c;
+        }
+        img {
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+            margin: 15px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            border: 3px solid #4a148c;
+            padding: 5px;
+            background: linear-gradient(45deg, rgba(13, 71, 161, 0.1), rgba(74, 20, 140, 0.1));
+            max-width: 100%;
+            height: auto;
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        img:hover {
+            transform: scale(1.03);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.5);
+            border-color: #0d47a1;
+        }
+        a {
+            color: #0d47a1;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            padding: 2px 5px;
+            border-radius: 3px;
+        }
+        a:hover {
+            color: #4a148c;
+            background-color: rgba(13, 71, 161, 0.1);
+            text-decoration: none;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        .nav-menu {
+            background-color: rgba(13, 71, 161, 0.8);
+            padding: 15px;
+            border-radius: 8px;
+            margin: 20px 0;
+            text-align: center;
+        }
+        .nav-menu a {
+            color: white;
+            margin: 0 15px;
+            padding: 8px 15px;
+            border-radius: 5px;
+            background-color: rgba(74, 20, 140, 0.7);
+            display: inline-block;
+            font-weight: bold;
+            transition: all 0.3s ease;
+        }
+        .nav-menu a:hover {
+            background-color: rgba(255, 255, 255, 0.2);
+            transform: translateY(-3px);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+        
+        a:hover {
+            color: #4a148c;
+            background-color: rgba(13, 71, 161, 0.1);
+            text-decoration: none;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        .nav-menu {
+            background-color: rgba(13, 71, 161, 0.8);
+            padding: 15px;
+            border-radius: 8px;
+            margin: 20px 0;
+            text-align: center;
+        }
+        .nav-menu a {
+            color: white;
+            margin: 0 15px;
+            padding: 8px 15px;
+            border-radius: 5px;
+            background-color: rgba(74, 20, 140, 0.7);
+            display: inline-block;
+            font-weight: bold;
+            transition: all 0.3s ease;
+        }
+        .nav-menu a:hover {
+            background-color: rgba(255, 255, 255, 0.2);
+            transform: translateY(-3px);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+        ul {
+            list-style-type: square;
+            padding-left: 25px;
+        }
+        li {
+            margin-bottom: 8px;
+            position: relative;
+            padding-left: 5px;
+            transition: all 0.3s ease;
+        }
+        li:hover {
+            transform: translateX(5px);
+            color: #0d47a1;
+        }
+        footer {
+            background: linear-gradient(to right, #4a148c, #0d47a1);
+            color: white;
+            text-align: center;
+            padding: 20px;
+            margin-top: 30px;
+            border-radius: 0 0 10px 10px;
+        }
+        footer a {
+            color: white;
+            text-decoration: underline;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>IA en Desarrollo Web</h1>
+    </header>
+    
+    <div class="container">
+        <div class="nav-menu">
+            <a href="DANDOFORMAALTEMADELDOCUMENTOHTML_JIMD.html">Inicio</a>
+            <a href="pag2_JIMD.html">HTML Básico</a>
+            <a href="pag4_JIMD.html">Herramientas de IA</a>
+        </div>
+
+        <div class="section">
+            <h2>Inteligencia Artificial en el Desarrollo Web</h2>
+            <p>
+                La inteligencia artificial está transformando la forma en que se desarrollan sitios web y aplicaciones. Desde la generación de código hasta la optimización de interfaces de usuario, la IA ofrece herramientas poderosas para los desarrolladores web.
+            </p>
+            <img src="https://cdn-icons-png.flaticon.com/512/2103/2103633.png" alt="IA en desarrollo web" width="200">
+        </div>
+
+        <div class="section">
+            <h2>Generación de Código con IA</h2>
+            <p>
+                Las herramientas de IA como GitHub Copilot, ChatGPT y otras soluciones basadas en modelos de lenguaje pueden generar código HTML, CSS y JavaScript a partir de descripciones en lenguaje natural. Esto acelera el desarrollo y permite a los programadores centrarse en tareas más creativas y complejas.
+            </p>
+            <p>
+                Beneficios de la generación de código con IA:
+            </p>
+            <ul>
+                <li>Desarrollo más rápido de prototipos</li>
+                <li>Sugerencias inteligentes mientras se escribe código</li>
+                <li>Solución de problemas comunes de programación</li>
+                <li>Generación de estructuras HTML complejas con pocas instrucciones</li>
+                <li>Creación de estilos CSS avanzados</li>
+            </ul>
+        </div>
+
+        <div class="section">
+            <h2>Diseño Web Asistido por IA</h2>
+            <p>
+                Las herramientas de diseño web impulsadas por IA pueden crear layouts, seleccionar paletas de colores y generar elementos visuales basados en preferencias y tendencias actuales. Estas herramientas ayudan a los diseñadores a crear interfaces atractivas y funcionales en menos tiempo.
+            </p>
+            <p>
+                Ejemplos de herramientas de diseño web con IA:
+            </p>
+            <ul>
+                <li>Wix ADI (Artificial Design Intelligence)</li>
+                <li>Adobe Sensei</li>
+                <li>Canva con funciones de IA</li>
+                <li>Figma con plugins de IA</li>
+            </ul>
+            <img src="https://cdn-icons-png.flaticon.com/512/2721/2721304.png" alt="Diseño web con IA" width="200">
+        </div>
+
+        <div class="section">
+            <h2>Optimización de UX/UI con IA</h2>
+            <p>
+                La inteligencia artificial puede analizar el comportamiento de los usuarios y sugerir mejoras en la experiencia de usuario (UX) y la interfaz de usuario (UI). Mediante el análisis de patrones de navegación, clics y tiempo de permanencia, la IA puede identificar áreas problemáticas y recomendar cambios para mejorar la usabilidad.
+            </p>
+            <p>
+                Aplicaciones de IA en UX/UI:
+            </p>
+            <ul>
+                <li>Pruebas A/B automatizadas</li>
+                <li>Personalización de interfaces según el comportamiento del usuario</li>
+                <li>Análisis de mapas de calor</li>
+                <li>Predicción de abandono de usuarios</li>
+                <li>Recomendaciones de mejora basadas en datos</li>
+            </ul>
+        </div>
+
+        <div class="section">
+            <h2>Chatbots y Asistentes Virtuales</h2>
+            <p>
+                Los chatbots impulsados por IA mejoran la interacción con los usuarios en sitios web, ofreciendo respuestas instantáneas a preguntas frecuentes, guiando a los visitantes por el sitio y recopilando información valiosa. Estos asistentes virtuales pueden integrarse fácilmente en sitios web modernos.
+            </p>
+            <p>
+                Ventajas de los chatbots en desarrollo web:
+            </p>
+            <ul>
+                <li>Atención al cliente 24/7</li>
+                <li>Reducción de la carga de trabajo del personal</li>
+                <li>Mejora de la experiencia del usuario</li>
+                <li>Recopilación de datos sobre necesidades de los usuarios</li>
+                <li>Personalización de la experiencia web</li>
+            </ul>
+            <img src="https://cdn-icons-png.flaticon.com/512/4712/4712027.png" alt="Chatbot IA" width="200">
+        </div>
+    </div>
+
+    <footer>
+        <p>&copy; 2023 IA en Desarrollo Web | Diseñado con ❤️ y tecnología</p>
+        <p><a href="DANDOFORMAALTEMADELDOCUMENTOHTML_JIMD.html">Volver a la página principal</a></p>
+    </footer>
+
+    <a href="#" id="back-to-top" style="position: fixed; bottom: 20px; right: 20px; background: linear-gradient(to right, #0d47a1, #4a148c); color: white; width: 50px; height: 50px; text-align: center; line-height: 50px; border-radius: 50%; text-decoration: none; box-shadow: 0 2px 5px rgba(0,0,0,0.3); display: none; font-size: 20px;">↑</a>
+    <script>
+    // Botón para volver arriba
+    window.onscroll = function() {scrollFunction()};
+
+    function scrollFunction() {
+      if (document.body.scrollTop > 300 || document.documentElement.scrollTop > 300) {
+        document.getElementById("back-to-top").style.display = "block";
+      } else {
+        document.getElementById("back-to-top").style.display = "none";
+      }
+    }
+    </script>
+</body>
+</html>
