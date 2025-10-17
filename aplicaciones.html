@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aplicaciones de IA en Programación — IA & Software</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+            background-color: #f5f5f5;
+            color: #333;
+        }
+        header {
+            background: #1a4db2;
+            color: white;
+            text-align: center;
+            padding: 1.5rem 0;
+        }
+        header h1 {
+            margin: 0;
+            font-size: 2rem;
+        }
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            background-color: #fff;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+        .tabs {
+            display: flex;
+            background-color: #234d8a;
+            padding: 0 10px;
+        }
+        .tab {
+            padding: 10px 15px;
+            color: white;
+            text-decoration: none;
+            margin-right: 5px;
+            font-size: 14px;
+        }
+        .tab.active {
+            background-color: #6b2ca8;
+            border-radius: 5px 5px 0 0;
+        }
+        .container {
+            width: 80%;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        .content {
+            padding: 20px;
+        }
+        h2 {
+            color: #6b2ca8;
+            border-bottom: 1px solid #ddd;
+            padding-bottom: 10px;
+            margin-top: 0;
+        }
+        .section-header {
+            background-color: #6b2ca8;
+            color: white;
+            padding: 8px 15px;
+            font-weight: bold;
+            margin-top: 20px;
+        }
+        .code-example {
+            background-color: #f5f5f5;
+            border-left: 4px solid #6b2ca8;
+            padding: 15px;
+            margin: 15px 0;
+            font-family: monospace;
+            overflow-x: auto;
+        }
+        footer {
+            background-color: #333;
+            color: white;
+            text-align: center;
+            padding: 20px 0;
+            margin-top: 30px;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Aplicaciones de la IA en Programación</h1>
+        <p>Descubre cómo la Inteligencia Artificial está revolucionando el desarrollo de software</p>
+    </header>
+
+    <nav>
+        <ul>
+            <li><a href="index.html">Inicio</a></li>
+            <li><a href="aplicaciones.html">Aplicaciones</a></li>
+            <li><a href="herramientas.html">Herramientas</a></li>
+            <li><a href="futuro.html">Futuro</a></li>
+            <li><a href="contacto.html">Contacto</a></li>
+        </ul>
+    </nav>
+
+    <div class="container">
+        <h2>Principales Aplicaciones de la IA en el Desarrollo de Software</h2>
+        
+        <div class="card">
+            <img src="https://cdn.pixabay.com/photo/2023/01/29/01/46/ai-generated-7751688_1280.jpg" alt="Generación de Código" class="card-image">
+            <h3>1. Generación Automática de Código</h3>
+            <p>Los modelos de IA como GitHub Copilot y OpenAI Codex pueden generar código basado en comentarios en lenguaje natural o completar fragmentos de código iniciados por el programador.</p>
+            <div class="code-block">
+                <pre><code>// Ejemplo de generación de código con IA
+// Comentario: Función para calcular el factorial de un número
+
+function factorial(n) {
+    if (n === 0 || n === 1) {
+        return 1;
+    }
+    return n * factorial(n - 1);
+}
+
+// La IA generaría este código basado en el comentario</code></pre>
+            </div>
+        </div>
+
+        <div class="card">
+            <img src="https://cdn.pixabay.com/photo/2023/05/12/08/41/ai-generated-7988341_1280.jpg" alt="Detección de Bugs" class="card-image">
+            <h3>2. Detección y Corrección de Errores</h3>
+            <p>Las herramientas de IA pueden analizar el código para identificar posibles bugs, vulnerabilidades de seguridad y problemas de rendimiento antes de que el código llegue a producción.</p>
+            <div class="code-block">
+                <pre><code>// Código con un error potencial
+function dividir(a, b) {
+    return a / b;  // La IA detectaría que falta validación para b = 0
+}
+
+// Código corregido sugerido por IA
+function dividirSeguro(a, b) {
+    if (b === 0) {
+        throw new Error("No se puede dividir por cero");
+    }
+    return a / b;
+}</code></pre>
+            </div>
+        </div>
+
+        <div class="card">
+            <img src="https://cdn.pixabay.com/photo/2023/04/08/18/01/ai-generated-7909213_1280.jpg" alt="Testing Automatizado" class="card-image">
+            <h3>3. Testing Automatizado</h3>
+            <p>La IA puede generar casos de prueba, identificar escenarios de borde y automatizar la creación de pruebas unitarias y de integración.</p>
+            <div class="code-block">
+                <pre><code>// Ejemplo de test generado por IA
+test('factorial de 5 debe ser 120', () => {
+    expect(factorial(5)).toBe(120);
+});
+
+test('factorial de 0 debe ser 1', () => {
+    expect(factorial(0)).toBe(1);
+});
+
+test('factorial con entrada negativa debe lanzar error', () => {
+    expect(() => factorial(-1)).toThrow('Entrada no válida');
+});</code></pre>
+            </div>
+        </div>
+
+        <div class="card">
+            <img src="https://cdn.pixabay.com/photo/2023/01/23/09/26/ai-generated-7738222_1280.jpg" alt="Optimización de Código" class="card-image">
+            <h3>4. Optimización de Algoritmos</h3>
+            <p>Los sistemas de IA pueden analizar el código y sugerir optimizaciones para mejorar el rendimiento, reducir la complejidad y minimizar el uso de recursos.</p>
+            <div class="code-block">
+                <pre><code>// Código ineficiente
+function buscarElemento(array, elemento) {
+    for (let i = 0; i < array.length; i++) {
+        if (array[i] === elemento) {
+            return true;
+        }
+    }
+    return false;
+}
+
+// Optimización sugerida por IA
+function buscarElementoOptimizado(array, elemento) {
+    return array.includes(elemento);  // Método nativo más eficiente
+}</code></pre>
+            </div>
+        </div>
+
+        <div class="card">
+            <img src="https://cdn.pixabay.com/photo/2023/02/08/07/32/ai-generated-7775566_1280.jpg" alt="Documentación Automática" class="card-image">
+            <h3>5. Documentación Automática</h3>
+            <p>La IA puede generar documentación técnica a partir del código fuente, incluyendo descripciones de funciones, parámetros y ejemplos de uso.</p>
+            <div class="code-block">
+                <pre><code>/**
+ * Calcula el factorial de un número entero no negativo.
+ * 
+ * @param {number} n - El número para calcular su factorial.
+ * @returns {number} El factorial de n.
+ * @throws {Error} Si n es negativo.
+ * 
+ * @example
+ * // Devuelve 120
+ * factorial(5);
+ */
+function factorial(n) {
+    // Implementación...
+}</code></pre>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <p>&copy; 2023 IA en Programación | Todos los derechos reservados</p>
+        <p>Contacto: <a href="mailto:info@iaenprogramacion.com" style="color: white;">info@iaenprogramacion.com</a></p>
+    </footer>
+</body>
+</html>
