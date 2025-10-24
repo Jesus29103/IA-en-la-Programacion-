@@ -1,0 +1,911 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Inteligencia Artificial en la Programación — IA & Software</title>
+    <style>
+       
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+            background-color: #f5f5f5;
+            color: #333;
+        }
+        
+
+        header {
+            background: #1a4db2;
+            color: white;
+            text-align: center;
+            padding: 1.5rem 0;
+        }
+        
+        header h1 {
+            margin: 0;
+            font-size: 2rem;
+        }
+        
+        
+        .tabs {
+            display: flex;
+            background-color: #234d8a;
+            padding: 0 10px;
+        }
+        
+        .tab {
+            padding: 10px 15px;
+            color: white;
+            text-decoration: none;
+            margin-right: 5px;
+            font-size: 14px;
+        }
+        
+        .tab.active {
+            background-color: #6b2ca8;
+            border-radius: 5px 5px 0 0;
+        }
+        
+       
+        .container {
+            width: 80%;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: white;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+        }
+        
+        .section-light {
+            background-color: #e6f7ff;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 8px;
+        }
+        
+        .section-medium {
+            background-color: #f0f0f0;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 8px;
+        }
+        
+        .section-dark {
+            background-color: #d6e4ff;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 8px;
+        }
+        
+        .special-char {
+            font-size: 1.2em;
+            color: #4b6cb7;
+            font-weight: bold;
+            margin: 0 5px;
+        }
+        
+       
+        .img-left {
+            float: left;
+            margin-right: 15px;
+            margin-bottom: 10px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+            max-width: 40%;
+        }
+        
+        .img-right {
+            float: right;
+            margin-left: 15px;
+            margin-bottom: 10px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+            max-width: 40%;
+        }
+        
+        .img-center {
+            display: block;
+            margin: 15px auto;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+            max-width: 80%;
+        }
+        
+        .clearfix::after {
+            content: "";
+            clear: both;
+            display: table;
+        }
+        
+        /* Estilos para tablas */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        
+        th, td {
+            border: 1px solid #ddd;
+            padding: 12px;
+            text-align: left;
+        }
+        
+        th {
+            background-color: #4b6cb7;
+            color: white;
+        }
+        
+        tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+        
+        tr:hover {
+            background-color: #e6f7ff;
+        }
+        
+        /* Estilos para formularios */
+        .form-container {
+            background-color: #f9f9f9;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            margin: 20px 0;
+        }
+        
+        .form-group {
+            margin-bottom: 15px;
+        }
+        
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+            color: #4a6fa5;
+        }
+        
+        input, textarea, select {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-family: inherit;
+            font-size: 1rem;
+            box-sizing: border-box;
+        }
+        
+        input[type="checkbox"], input[type="radio"] {
+            width: auto;
+            margin-right: 10px;
+        }
+        
+        button {
+            background-color: #4b6cb7;
+            color: white;
+            padding: 12px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background-color 0.3s;
+        }
+        
+        button:hover {
+            background-color: #182848;
+        }
+        
+        /* Estilos para frames */
+        .frame-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            margin: 20px 0;
+        }
+        
+        .frame {
+            flex: 1;
+            min-width: 250px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            padding: 15px;
+            background-color: #fff;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        
+        /* Estilos para mapas */
+        .map-container {
+            width: 100%;
+            height: 400px;
+            margin: 20px 0;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            overflow: hidden;
+            position: relative;
+        }
+        
+        /* Botones de navegación a páginas JIMD */
+        .nav-buttons {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: 10px;
+        }
+        .nav-button {
+            display: inline-block;
+            background-color: #4b6cb7;
+            color: white;
+            padding: 10px 14px;
+            border-radius: 6px;
+            text-decoration: none;
+            font-weight: bold;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.15);
+            transition: background-color 0.2s, transform 0.1s;
+        }
+        .nav-button:hover {
+            background-color: #182848;
+            transform: translateY(-1px);
+        }
+
+        /* Styles for navigation buttons to secondary pages */
+        .secondary-buttons { display:flex; gap:16px; flex-wrap:wrap; margin-top:12px; }
+        .secondary-buttons .nav-button { padding: 12px 18px; border-radius:8px; font-weight:700; }
+        .secondary-buttons .nav-button:hover { transform:translateY(-2px); }
+        
+
+        /* Pie de página */
+        footer {
+            background-color: #333;
+            color: white;
+            text-align: center;
+            padding: 20px 0;
+            margin-top: 30px;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Inteligencia Artificial en la Programación</h1>
+        <p>Explorando el impacto y las aplicaciones de la IA en el desarrollo de software</p>
+    </header>
+    
+    <nav>
+        <div class="tabs">
+            <a href="index.html" class="tab active">HTML Básico</a>
+            <a href="aplicaciones.html" class="tab">IA en Desarrollo Web</a>
+            <a href="herramientas.html" class="tab">Herramientas de IA</a>
+            <a href="futuro.html" class="tab">Futuro de IA</a>
+            <a href="contacto.html" class="tab">Contacto</a>
+        </div>
+        <ul>
+            <li><a href="#introduccion">Introducción</a></li>
+            <li><a href="#caracteres">Caracteres Especiales</a></li>
+            <li><a href="#enlaces">Enlaces</a></li>
+            <li><a href="#imagenes">Imágenes</a></li>
+            <li><a href="#fondos">Fondos y Colores</a></li>
+            <li><a href="#tablas">Tablas</a></li>
+            <li><a href="#formularios">Formularios</a></li>
+            <li><a href="#mapas">Mapas</a></li>
+            <li><a href="#frames">Frames</a></li>
+        </ul>
+        
+        <div class="nav-buttons">
+            <a href="aplicaciones.html" class="nav-button">Aplicaciones de IA</a>
+            <a href="herramientas.html" class="nav-button">Herramientas de IA</a>
+            <a href="futuro.html" class="nav-button">Futuro de IA</a>
+            <a href="contacto.html" class="nav-button">Contacto</a>
+        </div>
+    </nav>
+    
+    <div class="container">
+        <!-- Secciones secundarias: botones que abren en pestañas nuevas -->
+        <section id="secundarias" class="section-light">
+            <h1>Mas Infromacion aqui</h1>
+            <div class="secondary-buttons">
+                <a href="pag2_JIMD.html" class="nav-button" style="background:#4b6cb7;" target="_blank" rel="noopener noreferrer">HTML Básico </a>
+                <a href="pag3_JIMD.html" class="nav-button" style="background:#6b2ca8;" target="_blank" rel="noopener noreferrer">IA en Desarrollo Web </a>
+                <a href="pag4_JIMD.html" class="nav-button" style="background:#0d47a1;" target="_blank" rel="noopener noreferrer">Herramientas de IA </a>
+            </div>
+        </section>
+
+        <!-- Formularios iniciales: Registro y Encuesta rápida -->
+        <div style="display:flex;gap:20px;flex-wrap:wrap;margin-bottom:20px;">
+            <div class="form-container" style="flex:1;min-width:280px;">
+                <h3 style="margin-top:0;color:#234d8a;">Registro de Interés en IA</h3>
+                <form action="#" method="post">
+                    <div class="form-group">
+                        <label for="reg-nombre">Nombre completo</label>
+                        <input type="text" id="reg-nombre" name="reg-nombre" placeholder="Tu nombre" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="reg-email">Correo electrónico</label>
+                        <input type="email" id="reg-email" name="reg-email" placeholder="tu@correo.com" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="reg-area">Área de interés</label>
+                        <select id="reg-area" name="reg-area">
+                            <option value="ml">Machine Learning</option>
+                            <option value="nlp">Procesamiento de Lenguaje Natural</option>
+                            <option value="cv">Visión por Computadora</option>
+                            <option value="rl">Aprendizaje por Refuerzo</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="reg-msg">Comentario (opcional)</label>
+                        <textarea id="reg-msg" name="reg-msg" rows="3" placeholder="¿Qué tema te interesa más?"></textarea>
+                    </div>
+                    <button type="submit">Registrar interés</button>
+                </form>
+            </div>
+
+            <div class="form-container" style="flex:1;min-width:280px;">
+                <h3 style="margin-top:0;color:#234d8a;">Encuesta rápida sobre IA</h3>
+                <form action="#" method="post">
+                    <div class="form-group">
+                        <label>¿Usas herramientas de IA para programar?</label>
+                        <div>
+                            <input type="radio" id="enc-siempre" name="uso-ia" value="siempre"><label for="enc-siempre" style="display:inline">Siempre</label>
+                            <input type="radio" id="enc-algunas" name="uso-ia" value="algunas"><label for="enc-algunas" style="display:inline;margin-left:10px;">Algunas</label>
+                            <input type="radio" id="enc-nunca" name="uso-ia" value="nunca"><label for="enc-nunca" style="display:inline;margin-left:10px;">Nunca</label>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="enc-herr">Herramienta que más usas (opcional)</label>
+                        <input type="text" id="enc-herr" name="enc-herr" placeholder="GitHub Copilot, Tabnine...">
+                    </div>
+                    <div class="form-group">
+                        <label for="enc-sug">Sugerencia breve</label>
+                        <textarea id="enc-sug" name="enc-sug" rows="2" placeholder="¿Qué mejorarías en herramientas de IA?"></textarea>
+                    </div>
+                    <button type="submit">Enviar encuesta</button>
+                </form>
+            </div>
+        </div>
+
+        <section id="introduccion" class="section-light">
+            <h2>Introducción a la IA en Programación</h2>
+            <p>La Inteligencia Artificial (IA) está revolucionando la forma en que desarrollamos software. Desde asistentes de código hasta sistemas de autocompletado avanzados, la IA está transformando el panorama de la programación moderna.</p>
+            
+            <p>En este documento exploraremos diversos aspectos de la IA aplicada al desarrollo de software, incluyendo:</p>
+            
+            <ul>
+                <li>Herramientas de IA para programadores</li>
+                <li>Técnicas de aprendizaje automático en desarrollo</li>
+                <li>El futuro de la programación asistida por IA</li>
+                <li>Consideraciones éticas en el uso de IA para programar</li>
+            </ul>
+            
+            <div class="clearfix">
+                <img src="https://via.placeholder.com/800x400?text=Inteligencia+Artificial+en+Programación" alt="Inteligencia Artificial en Programación" class="img-center" width="800" height="400">
+            </div>
+            
+            <p>La integración de la IA en el ciclo de desarrollo de software no solo mejora la productividad, sino que también abre nuevas posibilidades para la innovación y la resolución de problemas complejos.</p>
+        </section>
+        
+        <section id="caracteres" class="section-medium">
+            <h2>Caracteres Especiales en HTML y IA</h2>
+            <p>Los caracteres especiales son fundamentales en HTML para representar símbolos que no están en el teclado estándar. Aquí algunos ejemplos relacionados con IA:</p>
+            
+            <ul>
+                <li><span class="special-char">&lambda;</span> (lambda) - <code>&amp;lambda;</code> - Usado en cálculo lambda y funciones anónimas</li>
+                <li><span class="special-char">&sum;</span> (suma) - <code>&amp;sum;</code> - Utilizado en notación matemática para algoritmos</li>
+                <li><span class="special-char">&rArr;</span> (flecha derecha) - <code>&amp;rArr;</code> - Indica flujo de procesamiento</li>
+                <li><span class="special-char">&infin;</span> (infinito) - <code>&amp;infin;</code> - Representa bucles o procesos continuos</li>
+                <li><span class="special-char">&Delta;</span> (delta) - <code>&amp;Delta;</code> - Cambio o diferencia en algoritmos de aprendizaje</li>
+                <li><span class="special-char">&forall;</span> (para todo) - <code>&amp;forall;</code> - Utilizado en lógica formal y algoritmos</li>
+                <li><span class="special-char">&exist;</span> (existe) - <code>&amp;exist;</code> - Usado en expresiones lógicas</li>
+                <li><span class="special-char">&oplus;</span> (suma exclusiva) - <code>&amp;oplus;</code> - Operación XOR en algoritmos</li>
+            </ul>
+            
+            <p>Estos símbolos son particularmente útiles al documentar algoritmos de IA o explicar conceptos matemáticos relacionados con el aprendizaje automático.</p>
+        </section>
+        
+        <section id="enlaces" class="section-dark">
+            <h2>Enlaces a Recursos de IA para Programadores</h2>
+            <p>A continuación, encontrarás enlaces útiles para aprender más sobre IA en programación:</p>
+            
+            <ul>
+                <li><a href="https://github.com/features/copilot" target="_blank">GitHub Copilot</a> - Asistente de programación basado en IA</li>
+                <li><a href="https://www.tensorflow.org/" target="_blank">TensorFlow</a> - Biblioteca de código abierto para aprendizaje automático</li>
+                <li><a href="https://pytorch.org/" target="_blank">PyTorch</a> - Framework de aprendizaje profundo</li>
+                <li><a href="https://huggingface.co/" target="_blank">Hugging Face</a> - Plataforma para modelos de lenguaje natural</li>
+                <li><a href="https://openai.com/" target="_blank">OpenAI</a> - Investigación y aplicaciones de IA avanzada</li>
+                <li><a href="https://www.kaggle.com/" target="_blank">Kaggle</a> - Plataforma de competiciones de ciencia de datos</li>
+                <li><a href="https://scikit-learn.org/" target="_blank">Scikit-learn</a> - Biblioteca de aprendizaje automático para Python</li>
+                <li><a href="https://www.fast.ai/" target="_blank">Fast.ai</a> - Cursos prácticos de aprendizaje profundo</li>
+            </ul>
+            
+            <p>Estos recursos te ayudarán a profundizar en el uso de la IA para mejorar tus habilidades de programación y desarrollar aplicaciones más inteligentes.</p>
+        </section>
+        
+        <section id="imagenes" class="section-light">
+            <h2>Imágenes: Alineación y Dimensionado</h2>
+            <p>Las imágenes son esenciales para ilustrar conceptos de IA. A continuación, se muestran ejemplos de diferentes alineaciones y dimensionados:</p>
+            
+            <h3>Imagen alineada a la izquierda</h3>
+            <div class="clearfix">
+                <img src="https://via.placeholder.com/300x200?text=IA+Coding+Assistant" alt="Asistente de Código IA" class="img-left" width="300" height="200">
+                <p>Los asistentes de código basados en IA pueden analizar el contexto de tu proyecto y sugerir fragmentos de código relevantes. Estas herramientas utilizan modelos de lenguaje entrenados con millones de repositorios para entender patrones y buenas prácticas de programación. La imagen de la izquierda ilustra cómo un asistente de IA puede sugerir código mientras programas.</p>
+                <p>Estos asistentes son cada vez más precisos y pueden adaptarse a tu estilo de programación con el tiempo, mejorando su utilidad a medida que los utilizas más.</p>
+            </div>
+            
+            <h3>Imagen alineada a la derecha</h3>
+            <div class="clearfix">
+                <img src="https://via.placeholder.com/300x200?text=Machine+Learning+Models" alt="Modelos de Machine Learning" class="img-right" width="300" height="200">
+                <p>Los modelos de aprendizaje automático son fundamentales para las aplicaciones de IA en programación. Estos modelos pueden analizar código, detectar errores, predecir funcionalidades y hasta generar tests automáticos. La imagen de la derecha muestra una representación visual de cómo funcionan estos modelos al procesar código fuente.</p>
+                <p>El entrenamiento de estos modelos requiere grandes cantidades de datos de código de alta calidad, y su efectividad mejora con cada iteración y retroalimentación.</p>
+            </div>
+            
+            <h3>Imagen centrada con dimensiones específicas</h3>
+            <div class="clearfix">
+                <img src="https://via.placeholder.com/600x300?text=AI+Development+Pipeline" alt="Pipeline de Desarrollo con IA" class="img-center" width="600" height="300">
+                <p>Un pipeline completo de desarrollo asistido por IA incluye múltiples etapas, desde la planificación hasta el despliegue. La imagen superior muestra las diferentes fases donde la IA puede intervenir para mejorar el proceso de desarrollo.</p>
+            </div>
+        </section>
+        
+        <section id="fondos" class="section-medium">
+            <h2>Fondos y Colores en Visualización de Datos de IA</h2>
+            <p>El uso adecuado de fondos y colores es crucial para visualizar datos complejos de IA. En esta sección, mostramos diferentes estilos aplicados a elementos HTML para representar información relacionada con la inteligencia artificial.</p>
+            
+            <div style="background-color: #e6f7ff; padding: 15px; border-left: 5px solid #1890ff; margin: 15px 0;">
+                <h3 style="color: #1890ff;">Precisión de Modelos</h3>
+                <p>Los modelos de IA para asistencia en programación alcanzan una precisión del 85-95% en tareas de autocompletado de código, dependiendo del lenguaje y contexto.</p>
+            </div>
+            
+            <div style="background-color: #f6ffed; padding: 15px; border-left: 5px solid #52c41a; margin: 15px 0;">
+                <h3 style="color: #52c41a;">Eficiencia Mejorada</h3>
+                <p>Los estudios muestran que los programadores que utilizan herramientas de IA pueden aumentar su productividad hasta en un 40% en tareas rutinarias de codificación.</p>
+            </div>
+            
+            <div style="background-color: #fff2e8; padding: 15px; border-left: 5px solid #fa8c16; margin: 15px 0;">
+                <h3 style="color: #fa8c16;">Consideraciones</h3>
+                <p>Es importante revisar siempre el código generado por IA, ya que puede contener errores sutiles o no seguir las mejores prácticas específicas de tu proyecto.</p>
+            </div>
+            
+            <div style="background-color: #f9f0ff; padding: 15px; border-left: 5px solid #722ed1; margin: 15px 0;">
+                <h3 style="color: #722ed1;">Tendencias Futuras</h3>
+                <p>Se espera que para 2025, más del 70% de los desarrolladores utilicen algún tipo de asistente de IA en su flujo de trabajo diario.</p>
+            </div>
+        </section>
+        
+        <section id="tablas" class="section-dark">
+            <h2>Tablas de Información sobre IA en Programación</h2>
+            <p>Las tablas son excelentes para organizar información comparativa sobre herramientas y tecnologías de IA:</p>
+            
+            <h3>Comparativa de Herramientas de IA para Programación</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Herramienta</th>
+                        <th>Tipo</th>
+                        <th>Lenguajes Soportados</th>
+                        <th>Características Principales</th>
+                        <th>Integración</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>GitHub Copilot</td>
+                        <td>Asistente de código</td>
+                        <td>Python, JavaScript, TypeScript, Ruby, Go, etc.</td>
+                        <td>Autocompletado, generación de funciones, comentarios</td>
+                        <td>VS Code, Visual Studio, JetBrains</td>
+                    </tr>
+                    <tr>
+                        <td>Tabnine</td>
+                        <td>Autocompletado</td>
+                        <td>+30 lenguajes</td>
+                        <td>Predicción de código, personalización por proyecto</td>
+                        <td>Múltiples IDEs</td>
+                    </tr>
+                    <tr>
+                        <td>Kite</td>
+                        <td>Asistente de código</td>
+                        <td>Python, JavaScript</td>
+                        <td>Documentación contextual, ejemplos de código</td>
+                        <td>VS Code, Atom, Sublime</td>
+                    </tr>
+                    <tr>
+                        <td>CodeGuru</td>
+                        <td>Revisión de código</td>
+                        <td>Java, Python</td>
+                        <td>Detección de bugs, optimización de rendimiento</td>
+                        <td>AWS, GitHub</td>
+                    </tr>
+                    <tr>
+                        <td>DeepCode</td>
+                        <td>Análisis semántico</td>
+                        <td>JavaScript, TypeScript, Python, Java</td>
+                        <td>Detección de vulnerabilidades, sugerencias de mejora</td>
+                        <td>GitHub, GitLab, Bitbucket</td>
+                    </tr>
+                </tbody>
+            </table>
+            
+            <h3>Técnicas de IA Aplicadas a la Programación</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Técnica</th>
+                        <th>Aplicación</th>
+                        <th>Beneficios</th>
+                        <th>Limitaciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Procesamiento de Lenguaje Natural</td>
+                        <td>Comprensión de código, generación de documentación</td>
+                        <td>Mejora la legibilidad, automatiza documentación</td>
+                        <td>Puede malinterpretar contexto específico</td>
+                    </tr>
+                    <tr>
+                        <td>Aprendizaje por Refuerzo</td>
+                        <td>Optimización de algoritmos, testing automático</td>
+                        <td>Encuentra soluciones óptimas, mejora cobertura de tests</td>
+                        <td>Requiere definición clara de objetivos</td>
+                    </tr>
+                    <tr>
+                        <td>Redes Neuronales</td>
+                        <td>Predicción de código, detección de patrones</td>
+                        <td>Alta precisión en predicciones, adaptabilidad</td>
+                        <td>Necesita grandes cantidades de datos de entrenamiento</td>
+                    </tr>
+                    <tr>
+                        <td>Sistemas Expertos</td>
+                        <td>Debugging, recomendaciones de arquitectura</td>
+                        <td>Conocimiento especializado, explicabilidad</td>
+                        <td>Menos flexibles que otros enfoques de IA</td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+        
+        <section id="formularios" class="section-light">
+            <h2>Formularios para Feedback sobre Herramientas de IA</h2>
+            <p>Los formularios permiten recopilar información valiosa sobre la experiencia de los usuarios con herramientas de IA para programación:</p>
+            
+            <div class="form-container">
+                <form action="#" method="post">
+                    <div class="form-group">
+                        <label for="nombre">Nombre:</label>
+                        <input type="text" id="nombre" name="nombre" placeholder="Tu nombre" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="email">Correo Electrónico:</label>
+                        <input type="email" id="email" name="email" placeholder="tu@email.com" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="experiencia">Nivel de Experiencia en Programación:</label>
+                        <select id="experiencia" name="experiencia" required>
+                            <option value="">Selecciona una opción</option>
+                            <option value="principiante">Principiante (< 1 año)</option>
+                            <option value="intermedio">Intermedio (1-3 años)</option>
+                            <option value="avanzado">Avanzado (3-5 años)</option>
+                            <option value="experto">Experto (5+ años)</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>Herramientas de IA que has utilizado:</label>
+                        <div>
+                            <input type="checkbox" id="copilot" name="herramientas[]" value="copilot">
+                            <label for="copilot" style="display: inline;">GitHub Copilot</label>
+                        </div>
+                        <div>
+                            <input type="checkbox" id="tabnine" name="herramientas[]" value="tabnine">
+                            <label for="tabnine" style="display: inline;">Tabnine</label>
+                        </div>
+                        <div>
+                            <input type="checkbox" id="kite" name="herramientas[]" value="kite">
+                            <label for="kite" style="display: inline;">Kite</label>
+                        </div>
+                        <div>
+                            <input type="checkbox" id="codeguru" name="herramientas[]" value="codeguru">
+                            <label for="codeguru" style="display: inline;">AWS CodeGuru</label>
+                        </div>
+                        <div>
+                            <input type="checkbox" id="otras" name="herramientas[]" value="otras">
+                            <label for="otras" style="display: inline;">Otras</label>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="satisfaccion">Nivel de Satisfacción:</label>
+                        <input type="range" id="satisfaccion" name="satisfaccion" min="1" max="10" value="7">
+                        <div style="display: flex; justify-content: space-between;">
+                            <span>1</span>
+                            <span>10</span>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="comentarios">Comentarios sobre tu experiencia:</label>
+                        <textarea id="comentarios" name="comentarios" rows="5" placeholder="Comparte tu experiencia usando herramientas de IA para programar..."></textarea>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>¿Cómo ha impactado la IA en tu productividad?</label>
+                        <div>
+                            <input type="radio" id="mejora-significativa" name="impacto" value="mejora-significativa" required>
+                            <label for="mejora-significativa" style="display: inline;">Mejora significativa</label>
+                        </div>
+                        <div>
+                            <input type="radio" id="mejora-moderada" name="impacto" value="mejora-moderada">
+                            <label for="mejora-moderada" style="display: inline;">Mejora moderada</label>
+                        </div>
+                        <div>
+                            <input type="radio" id="sin-cambios" name="impacto" value="sin-cambios">
+                            <label for="sin-cambios" style="display: inline;">Sin cambios notables</label>
+                        </div>
+                        <div>
+                            <input type="radio" id="impacto-negativo" name="impacto" value="impacto-negativo">
+                            <label for="impacto-negativo" style="display: inline;">Impacto negativo</label>
+                        </div>
+                    </div>
+                    
+                    <button type="submit">Enviar Feedback</button>
+                </form>
+            </div>
+        </section>
+        
+        <section id="mapas" class="section-medium">
+            <h2>Mapas de Conceptos de IA en Programación</h2>
+            <p>Los mapas son útiles para visualizar relaciones entre conceptos de IA aplicados a la programación:</p>
+            
+            <div class="clearfix">
+                <img src="https://via.placeholder.com/800x500?text=Mapa+Conceptual:+IA+en+Programación" alt="Mapa Conceptual de IA en Programación" class="img-center" width="800" height="500">
+            </div>
+            
+            <h3>Mapa Interactivo</h3>
+            <p>A continuación se muestra un mapa interactivo que muestra las principales áreas de aplicación de IA en programación:</p>
+            
+            <div class="map-container">
+                <img src="https://via.placeholder.com/800x400?text=Mapa+Interactivo" alt="Mapa Interactivo" style="width: 100%; height: 100%;">
+                
+                <!-- Áreas del mapa -->
+                <map name="ai-map">
+                    <area shape="rect" coords="50,50,200,150" href="#asistentes-codigo" alt="Asistentes de Código">
+                    <area shape="rect" coords="250,50,400,150" href="#generacion-tests" alt="Generación de Tests">
+                    <area shape="rect" coords="450,50,600,150" href="#optimizacion" alt="Optimización de Código">
+                    <area shape="rect" coords="650,50,800,150" href="#debugging" alt="Debugging Inteligente">
+                    <area shape="rect" coords="50,200,200,300" href="#documentacion" alt="Documentación Automática">
+                    <area shape="rect" coords="250,200,400,300" href="#analisis" alt="Análisis de Código">
+                    <area shape="rect" coords="450,200,600,300" href="#refactoring" alt="Refactoring Automático">
+                    <area shape="rect" coords="650,200,800,300" href="#seguridad" alt="Seguridad y Vulnerabilidades">
+                </map>
+
+                
+                <!-- Simulación de áreas clickeables -->
+                <div id="asistentes-codigo" style="position: absolute; top: 50px; left: 50px; width: 150px; height: 100px; background-color: rgba(110, 142, 251, 0.3); display: flex; align-items: center; justify-content: center; color: #333; font-weight: bold; cursor: pointer;">
+                    Asistentes de Código
+                </div>
+                <div id="generacion-tests" style="position: absolute; top: 50px; left: 250px; width: 150px; height: 100px; background-color: rgba(110, 142, 251, 0.3); display: flex; align-items: center; justify-content: center; color: #333; font-weight: bold; cursor: pointer;">
+                    Generación de Tests
+                </div>
+                <div id="optimizacion" style="position: absolute; top: 50px; left: 450px; width: 150px; height: 100px; background-color: rgba(110, 142, 251, 0.3); display: flex; align-items: center; justify-content: center; color: #333; font-weight: bold; cursor: pointer;">
+                    Optimización de Código
+                </div>
+                <div id="debugging" style="position: absolute; top: 50px; left: 650px; width: 150px; height: 100px; background-color: rgba(110, 142, 251, 0.3); display: flex; align-items: center; justify-content: center; color: #333; font-weight: bold; cursor: pointer;">
+                    Debugging Inteligente
+                </div>
+                <div id="documentacion" style="position: absolute; top: 200px; left: 50px; width: 150px; height: 100px; background-color: rgba(167, 119, 227, 0.3); display: flex; align-items: center; justify-content: center; color: #333; font-weight: bold; cursor: pointer;">
+                    Documentación Automática
+                </div>
+                <div id="analisis" style="position: absolute; top: 200px; left: 250px; width: 150px; height: 100px; background-color: rgba(167, 119, 227, 0.3); display: flex; align-items: center; justify-content: center; color: #333; font-weight: bold; cursor: pointer;">
+                    Análisis de Código
+                </div>
+                <div id="refactoring" style="position: absolute; top: 200px; left: 450px; width: 150px; height: 100px; background-color: rgba(167, 119, 227, 0.3); display: flex; align-items: center; justify-content: center; color: #333; font-weight: bold; cursor: pointer;">
+                    Refactoring Automático
+                </div>
+                <div id="seguridad" style="position: absolute; top: 200px; left: 650px; width: 150px; height: 100px; background-color: rgba(167, 119, 227, 0.3); display: flex; align-items: center; justify-content: center; color: #333; font-weight: bold; cursor: pointer;">
+                    Seguridad y Vulnerabilidades
+                </div>
+            </div>
+        </section>
+        
+        <section id="frames" class="section-dark">
+            <h2>Frames para Contenido Relacionado</h2>
+            <p>Los frames permiten organizar contenido relacionado en secciones independientes:</p>
+            
+            <div class="frame-container">
+                <div class="frame">
+                    <h3>Lenguajes de Programación y IA</h3>
+                    <p>Cada lenguaje de programación tiene diferentes herramientas y frameworks de IA:</p>
+                    <ul>
+                        <li><strong>Python:</strong> TensorFlow, PyTorch, scikit-learn</li>
+                        <li><strong>JavaScript:</strong> TensorFlow.js, Brain.js</li>
+                        <li><strong>Java:</strong> Deeplearning4j, Weka</li>
+                        <li><strong>C++:</strong> Dlib, OpenCV con módulos de IA</li>
+                    </ul>
+                </div>
+                
+                <div class="frame">
+                    <h3>Casos de Uso</h3>
+                    <p>La IA en programación se aplica en diversos escenarios:</p>
+                    <ul>
+                        <li>Autocompletado inteligente de código</li>
+                        <li>Detección y corrección de bugs</li>
+                        <li>Optimización de rendimiento</li>
+                        <li>Generación automática de tests</li>
+                        <li>Refactorización de código</li>
+                    </ul>
+                </div>
+                
+                <div class="frame">
+                    <h3>Futuro de la IA en Programación</h3>
+                    <p>Tendencias emergentes en el campo:</p>
+                    <ul>
+                        <li>Programación por lenguaje natural</li>
+                        <li>Generación completa de aplicaciones</li>
+                        <li>Debugging predictivo</li>
+                        <li>Personalización avanzada de asistentes</li>
+                        <li>Colaboración humano-IA en tiempo real</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <h3>Iframe con Recursos Externos</h3>
+            <p>A continuación se muestra un iframe que carga contenido externo relacionado con IA en programación:</p>
+            
+            <iframe src="about:blank" width="100%" height="400" style="border: 1px solid #ddd; border-radius: 8px;" title="Recursos de IA para Programación">
+                Tu navegador no soporta iframes.
+            </iframe>
+            <p style="text-align: center; font-style: italic; margin-top: 10px;">Nota: Este iframe cargaría contenido externo en un entorno real.</p>
+        </section>
+        
+        <section class="section-light">
+            <h2>Conclusiones</h2>
+            <p>La integración de la IA en la programación está transformando radicalmente cómo desarrollamos software. Desde asistentes de código hasta herramientas de debugging inteligente, las posibilidades son enormes y continúan expandiéndose.</p>
+            
+            <p>Puntos clave a recordar:</p>
+            <ul>
+                <li>La IA no reemplaza a los programadores, sino que potencia sus capacidades</li>
+                <li>Es importante mantener un equilibrio entre automatización y comprensión del código</li>
+                <li>Las herramientas de IA deben verse como colaboradores, no como sustitutos</li>
+                <li>El futuro de la programación probablemente incluirá una colaboración más estrecha entre humanos e IA</li>
+            </ul>
+            
+            <p>A medida que estas tecnologías continúan evolucionando, es fundamental que los desarrolladores se mantengan actualizados y aprendan a aprovechar estas herramientas para mejorar su productividad y la calidad de su código.</p>
+        </section>
+    </div>
+    
+    <footer>
+        <p>&copy; 2023 Inteligencia Artificial en Programación | Creado con HTML y CSS</p>
+        <p>Este documento incluye ejemplos de caracteres especiales, enlaces, imágenes, fondos, colores, tablas, formularios, mapas y frames.</p>
+    </footer>
+</body>
+</html>
+    
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Inteligencia Artificial en la Programación</h1>
+        <p>Explorando el impacto y las aplicaciones de la IA en el desarrollo de software</p>
+    </header>
+
+    <nav>
+        <ul>
+            <li><a href="index.html">Inicio</a></li>
+            <li><a href="aplicaciones.html">Aplicaciones</a></li>
+            <li><a href="herramientas.html">Herramientas</a></li>
+            <li><a href="futuro.html">Futuro</a></li>
+            <li><a href="contacto.html">Contacto</a></li>
+        </ul>
+    </nav>
+
+    <div class="container">
+        <h2>Bienvenidos al Mundo de la IA en Programación</h2>
+       
+        <p>La Inteligencia Artificial está transformando el mundo de la programación &mdash; desde la generación de código hasta la optimización de algoritmos. Los desarrolladores ahora pueden aprovechar herramientas de IA para mejorar su productividad &copy; 2023.</p>
+        
+        <p>Algunos símbolos matemáticos relevantes en IA: &sum; (suma), &prod; (producto), &radic; (raíz cuadrada), &infin; (infinito), &Delta; (delta).</p>
+
+       
+        <div class="centered-image">
+            <img src="https://cdn.pixabay.com/photo/2023/01/22/13/46/ai-generated-7736488_1280.jpg" alt="Inteligencia Artificial" class="hero-image">
+            <p><em>Representación artística de la Inteligencia Artificial</em></p>
+        </div>
+
+        <h3>Áreas de Aplicación de la IA en Programación</h3>
+        
+        <div class="image-container">
+            <img src="https://cdn.pixabay.com/photo/2023/04/11/11/21/ai-generated-7917229_1280.jpg" alt="Generación de Código" width="300" height="200">
+            <img src="https://cdn.pixabay.com/photo/2023/05/02/17/33/ai-generated-7966339_1280.jpg" alt="Análisis de Datos" width="300" height="200">
+            <img src="https://cdn.pixabay.com/photo/2023/07/05/18/13/ai-generated-8108440_1280.jpg" alt="Automatización" width="300" height="200">
+        </div>
+
+       
+        <h3>Comparativa de Herramientas de IA para Programación</h3>
+        <table>
+            <thead>
+                <tr>
+                    <th>Herramienta</th>
+                    <th>Especialidad</th>
+                    <th>Lenguajes Soportados</th>
+                    <th>Nivel de Precisión</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>GitHub Copilot</td>
+                    <td>Generación de código</td>
+                    <td>Python, JavaScript, TypeScript, Ruby, Go, C++</td>
+                    <td>Alto</td>
+                </tr>
+                <tr>
+                    <td>Tabnine</td>
+                    <td>Autocompletado de código</td>
+                    <td>+30 lenguajes</td>
+                    <td>Medio-Alto</td>
+                </tr>
+                <tr>
+                    <td>CodeWhisperer</td>
+                    <td>Sugerencias de código</td>
+                    <td>Python, Java, JavaScript</td>
+                    <td>Medio</td>
+                </tr>
+                <tr>
+                    <td>ChatGPT</td>
+                    <td>Explicación y generación de código</td>
+                    <td>Múltiples lenguajes</td>
+                    <td>Medio-Alto</td>
+                </tr>
+            </tbody>
+        </table>
+
+        
+        <h3>¿Quieres saber más sobre IA en programación?</h3>
+        <div class="form-container">
+            <form action="#" method="post">
+                <label for="nombre">Nombre:</label>
+                <input type="text" id="nombre" name="nombre" required>
+                
+                <label for="email">Correo Electrónico:</label>
+                <input type="email" id="email" name="email" required>
+                
+                <label for="interes">Área de interés:</label>
+                <select id="interes" name="interes">
+                    <option value="generacion">Generación de código</option>
+                    <option value="testing">Testing automatizado</option>
+                    <option value="optimizacion">Optimización de algoritmos</option>
+                    <option value="analisis">Análisis de código</option>
+                </select>
+                
+                <label for="mensaje">Mensaje:</label>
+                <textarea id="mensaje" name="mensaje" rows="4"></textarea>
+                
+                <button type="submit">Enviar</button>
+            </form>
+        </div>
+
+       
+        <h3>Centros de Investigación en IA</h3>
+        <div class="map-container">
+            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3168.6482351896156!2d-122.17633492392031!3d37.42748597981944!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x808fbb28416493a7%3A0x778a60994d7a5e4c!2sStanford%20University!5e0!3m2!1sen!2sus!4v1682789266880!5m2!1sen!2sus" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+        </div>
+
+      
+        <h3>Últimas Tendencias en IA para Programación</h3>
+        <div class="frame-container">
+            <iframe src="https://www.youtube.com/embed/videoseries?list=PL8FnQMH2k7jzhtVYbKmvrMyXDYMmgjj_n" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+        </div>
+
+       
+        <h3>Recursos Adicionales</h3>
+        <ul>
+            <li><a href="https://github.com/features/copilot" target="_blank">GitHub Copilot</a> - Asistente de programación basado en IA</li>
+            <li><a href="https://openai.com/blog/openai-codex/" target="_blank">OpenAI Codex</a> - Modelo de IA para generación de código</li>
+            <li><a href="https://www.tabnine.com/" target="_blank">Tabnine</a> - Autocompletado de código con IA</li>
+            <li><a href="https://aws.amazon.com/codewhisperer/" target="_blank">Amazon CodeWhisperer</a> - Asistente de programación de AWS</li>
+        </ul>
+    </div>
+        <p>&copy; 2023 IA en Programación | Todos los derechos reservados</p>
+        <p>Contacto: <a href="mailto:info@iaenprogramacion.com" style="color: white;">info@iaenprogramacion.com</a></p>
+    </footer>
+</body>
+</html>
