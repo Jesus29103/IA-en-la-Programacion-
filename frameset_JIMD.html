@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Mi primera página con frames - JIMD</title>
+  <style>
+    html, frameset { height: 100%; }
+    frameset {
+      background: linear-gradient(135deg, #eef2ff 0%, #fdf2f8 100%);
+    }
+  </style>
+</head>
+<frameset cols="22%,78%" border="0" frameborder="0" framespacing="0">
+  <frame src="mi_indice.html" name="indice" title="Índice" scrolling="auto" noresize="noresize" style="border-right: 2px solid #e5e7eb; background-color: #f8fafc;">
+  <frame src="mi_presentacion.html" name="principal" title="Contenido" scrolling="auto" style="background-color: #ffffff;">
+  <noframes>
+    <body>
+      Tu navegador no soporta frames. Abre <a href="mi_presentacion.html">mi_presentacion.html</a> directamente.
+    </body>
+  </noframes>
+</frameset>
+</html>

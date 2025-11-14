@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Presentación</title>
+  <style>
+    :root {
+      --bg: #ffffff;
+      --text: #0f172a;
+      --muted: #475569;
+      --card: #f8fafc;
+      --border: #e5e7eb;
+      --accent: #6366f1;
+    }
+    * { box-sizing: border-box; }
+    body { font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif; margin: 0; padding: 22px; background: var(--bg); color: var(--text); }
+    .hero { padding: 18px 20px; border: 1px solid var(--border); border-radius: 14px; background: var(--card); }
+    .hero h1 { margin: 0 0 6px; font-size: 22px; }
+    .hero p { margin: 0; color: var(--muted); }
+    .grid { margin-top: 16px; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
+    .card { padding: 14px; border: 1px solid var(--border); border-radius: 12px; background: #fff; transition: transform .15s ease, box-shadow .2s ease; }
+    .card:hover { transform: translateY(-1px); box-shadow: 0 8px 18px rgba(0,0,0,0.08); }
+    .card h2 { margin: 0 0 8px; font-size: 16px; }
+    .card p { margin: 0; color: var(--muted); }
+    .actions { margin-top: 16px; }
+    .btn { display: inline-block; padding: 10px 12px; border-radius: 10px; text-decoration: none; background: var(--accent); color: #fff; }
+    .btn:hover { filter: brightness(1.05); }
+    .note { margin-top: 14px; padding: 12px; background: #eef2ff; border-radius: 10px; color: #1f2937; border: 1px solid #e0e7ff; }
+  </style>
+</head>
+<body>
+  <div class="hero">
+    <h1>Bienvenido</h1>
+    <p>Usa el índice de la izquierda para navegar sin recargar toda la ventana.</p>
+  </div>
+
+  <div class="grid">
+    <a class="card" href="Final_JIMD.html" target="_parent">
+      <h2>Proyecto principal</h2>
+      <p>Explora la página con el mapa y las imágenes.</p>
+    </a>
+    <a class="card" href="pag2_JIMD.html" target="_parent">
+      <h2>Página 2</h2>
+      <p>Contenido adicional del proyecto.</p>
+    </a>
+    <a class="card" href="pag3_JIMD.html" target="_parent">
+      <h2>Página 3</h2>
+      <p>Más detalles y ejemplos.</p>
+    </a>
+    <a class="card" href="pag4_JIMD.html" target="_parent">
+      <h2>Página 4</h2>
+      <p>Recursos y referencias.</p>
+    </a>
+  </div>
+
+  <div class="actions">
+    <a class="btn" href="mi_presentacion.html" target="principal">Volver a presentación</a>
+  </div>
+
+</body>
+</html>
