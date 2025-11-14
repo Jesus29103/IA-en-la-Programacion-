@@ -283,13 +283,6 @@
             <li><a href="#mapas">Mapas</a></li>
             <li><a href="#frames">Frames</a></li>
         </ul>
-        
-        <div class="nav-buttons">
-            <a href="aplicaciones.html" class="nav-button">Aplicaciones de IA</a>
-            <a href="herramientas.html" class="nav-button">Herramientas de IA</a>
-            <a href="futuro.html" class="nav-button">Futuro de IA</a>
-            
-        </div>
     </nav>
     
     <div class="container">
@@ -847,33 +840,210 @@
         </section>
         
         <section class="section-light">
-            <h2>Conclusiones</h2>
-            <p>La integración de la IA en la programación está transformando radicalmente cómo desarrollamos software. Desde asistentes de código hasta herramientas de debugging inteligente, las posibilidades son enormes y continúan expandiéndose.</p>
             
-            <p>Puntos clave a recordar:</p>
+        </section>
+
+        
+            <h2>IA en la Programación: contenido concreto y aplicado</h2>
+            <p>Esta sección resume, de forma práctica y verificable, cómo aplicar IA en el ciclo de desarrollo con beneficios medibles, límites claros y arquitectura correcta.</p>
+
+            <h3>Qué aporta la IA al desarrollo</h3>
             <ul>
-                <li>La IA no reemplaza a los programadores, sino que potencia sus capacidades</li>
-                <li>Es importante mantener un equilibrio entre automatización y comprensión del código</li>
-                <li>Las herramientas de IA deben verse como colaboradores, no como sustitutos</li>
-                <li>El futuro de la programación probablemente incluirá una colaboración más estrecha entre humanos e IA</li>
+                <li><strong>Productividad</strong>: acelera tareas repetitivas (plantillas, documentación, tests básicos).</li>
+                <li><strong>Calidad</strong>: sugiere correcciones y patrones, detecta code smells y vulnerabilidades comunes.</li>
+                <li><strong>Descubrimiento</strong>: ayuda a explorar APIs, generar ejemplos y comparar enfoques.</li>
+                <li><strong>Aprendizaje</strong>: explica snippets, conceptos y permite refactorizar con guía.</li>
             </ul>
-            
-            <p>A medida que estas tecnologías continúan evolucionando, es fundamental que los desarrolladores se mantengan actualizados y aprendan a aprovechar estas herramientas para mejorar su productividad y la calidad de su código.</p>
+
+            <h3>Casos de uso clave (con resultados esperados)</h3>
+            <ul>
+                <li><strong>Autocompletado/contextual</strong>: reducción del tiempo de escritura, menor fricción en patrones estándar.</li>
+                <li><strong>Generación de tests</strong>: cobertura rápida de casos felices y bordes simples; requiere validación humana.</li>
+                <li><strong>Refactor seguro</strong>: propuestas de extracción de funciones y nombres más claros; revisar cambios antes de fusionar.</li>
+                <li><strong>Documentación</strong>: generación de README, comentarios, y guías de API en formato consistente.</li>
+                <li><strong>Asistencia en migraciones</strong>: mapea cambios entre versiones de frameworks, sugiere equivalencias y deprecaciones.</li>
+            </ul>
+
+            <h3>Arquitectura correcta de integración (alto nivel)</h3>
+            <ol>
+                <li><strong>Proveedor LLM</strong>: API confiable (latencia, disponibilidad, coste, cumplimiento).</li>
+                <li><strong>Orquestador</strong>: servicio que compone prompts, valida salidas y gestiona errores/reintentos.</li>
+                <li><strong>Contexto</strong>: retrieval (embeddings) para documentación propia, snippets y estándares internos.</li>
+                <li><strong>Guardrails</strong>: validación de formato, límites de longitud, moderación y filtrado de datos sensibles.</li>
+                <li><strong>Observabilidad</strong>: métricas (latencia, tasa de error), logs de prompts y evaluaciones de calidad.</li>
+            </ol>
+
+            <h3>Buenas prácticas y límites</h3>
+            <ul>
+                <li>Revisar siempre el código generado antes de producción; la IA sugiere, tú decides.</li>
+                <li>Evitar datos sensibles en prompts; anonimizar y cumplir normativas.</li>
+                <li>Usar esquemas (JSON, OpenAPI) para exigir formatos y parsear de forma segura.</li>
+                <li>Medir la efectividad: tiempo ahorrado, defectos evitados, cobertura añadida.</li>
+                <li>Definir cuándo no usar IA: lógica crítica, criptografía, decisiones de seguridad.</li>
+            </ul>
+
+            <h3>Riesgos y mitigaciones</h3>
+            <ul>
+                <li><strong>Alucinaciones</strong>: aplicar verificación automática, fuentes internas y revisión humana.</li>
+                <li><strong>Seguridad</strong>: sanitizar entradas/salidas, usar listas blancas de funciones/llamadas.</li>
+                <li><strong>Costes</strong>: cachear resultados, batching y límites de uso por equipo.</li>
+                <li><strong>Dependencia</strong>: fallback sin IA y portabilidad de proveedor.</li>
+            </ul>
+
+            <h3>Herramientas y ecosistema</h3>
+            <ul>
+                <li>Asistentes de IDE: completado, refactor y explicaciones en editor.</li>
+                <li>SDKs y APIs LLM: integración programática con validación de formato.</li>
+                <li>Vector DB/Embeddings: contexto relevante para documentación interna.</li>
+                <li>Evaluación/observabilidad: paneles, métricas y pruebas A/B de prompts.</li>
+            </ul>
+
+            <h3>Ejemplos breves</h3>
+            <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px;">
+                <div>
+                    <h4>Node.js: pedir documentación de una función</h4>
+                    <pre><code>// Ejemplo conceptual
+import llm from 'llm-sdk'
+
+const prompt = `Documenta la función sum(a, b) con ejemplos y casos borde.`
+const out = await llm.generate({ prompt, format: 'markdown' })
+// Validar que out no exceda tamaño y que cumple formato
+                    </code></pre>
+                </div>
+                <div>
+                    <h4>Python: generar tests para casos simples</h4>
+                    <pre><code># Ejemplo conceptual
+from llm_sdk import generate
+
+prompt = "Crea tres tests unitarios para la función sum(a, b) en pytest"
+out = generate(prompt, format='code')
+# Revisar y ajustar antes de integrar en el repo
+                    </code></pre>
+                </div>
+            </div>
+
+            <h3>Checklist mínimo para producción</h3>
+            <ul>
+                <li>Validación de formato y longitud en cada salida.</li>
+                <li>Registro de prompts (con anonimización) y resultados.</li>
+                <li>Alertas por latencia, errores y coste.</li>
+                <li>Fallback sin IA y pruebas contractuales.</li>
+                <li>Política de revisión humana obligatoria en cambios críticos.</li>
+            </ul>
+        </section>
+        <section id="ia-programacion-nueva" class="section-light" style="padding: 24px 0;">
+            <h2>IA en la programación: guía concreta</h2>
+            <p>Información precisa y útil para aplicar IA sin perder control de calidad, seguridad ni costes.</p>
+
+            <h3>Aportes clave</h3>
+            <ul>
+                <li>Productividad: autocompletado, plantillas y documentación consistente.</li>
+                <li>Calidad: sugerencias de patrones, refactor y detección de code smells.</li>
+                <li>Aprendizaje: explicaciones, analogías y ejemplos de uso de APIs.</li>
+                <li>Descubrimiento: exploración guiada de librerías y frameworks.</li>
+            </ul>
+
+            <h3>Patrón de integración seguro</h3>
+            <ol>
+                <li>Proveedor LLM con SLA y cumplimiento.</li>
+                <li>Orquestador que valida formato y gestiona reintentos.</li>
+                <li>RAG para aportar contexto interno (docs, snippets, estándares).</li>
+                <li>Guardrails: límites de tokens, tamaño, moderación y sanitización.</li>
+                <li>Observabilidad: métricas, logs de prompts y evaluaciones periódicas.</li>
+            </ol>
+
+            <h3>Buenas prácticas</h3>
+            <ul>
+                <li>Evitar datos sensibles en prompts; anonimizar y controlar acceso.</li>
+                <li>Exigir formatos estrictos (JSON/Markdown) y validar con esquemas.</li>
+                <li>Medir impacto: tiempo ahorrado, cobertura añadida, defectos evitados.</li>
+                <li>Definir cuándo no usar IA (lógica crítica, criptografía, seguridad).</li>
+            </ul>
+
+            <h3>Ejemplo breve</h3>
+            <pre><code>// JSON esperado para documentación automatizada
+{
+  "funcion": "sum(a, b)",
+  "casos": [
+    { "in": [1, 2], "out": 3 },
+    { "in": [-1, 2], "out": 1 }
+  ],
+  "notas": "Validar tipos y límites antes del uso"
+}
+// Validar con JSON Schema antes de guardar o mostrar
+            </code></pre>
+
+            <h3>Checklist mínimo</h3>
+            <ul>
+                <li>Validación de formato y límites en cada respuesta.</li>
+                <li>Registro de prompts y outputs con controles de acceso.</li>
+                <li>Alertas por latencia, errores y coste excesivo.</li>
+                <li>Fallback sin IA y pruebas contractuales entre servicios.</li>
+            </ul>
+
+            <h3>¿Cómo te ayuda la IA en programación?</h3>
+            <ul>
+                <li>Genera código base y ejemplos para acelerar el inicio de tareas.</li>
+                <li>Propone refactorizaciones para mejorar legibilidad y mantenimiento.</li>
+                <li>Detecta posibles vulnerabilidades y errores comunes desde el análisis estático.</li>
+                <li>Redacta documentación y guías de uso con ejemplos reproducibles.</li>
+                <li>Asiste en migraciones de frameworks, sugiriendo equivalencias y cambios necesarios.</li>
+                <li>Ayuda a crear pruebas unitarias de casos felices y bordes básicos.</li>
+            </ul>
+
+            <h3>¿Dónde encontramos la IA para programar?</h3>
+            <ul>
+                <li>Asistentes en IDE: herramientas de autocompletado y refactor dentro del editor.</li>
+                <li>APIs de modelos: servicios en la nube para integrar LLM en tus apps.</li>
+                <li>Frameworks de orquestación: librerías para construir flujos con prompts y RAG.</li>
+                <li>Bases vectoriales: almacenamiento de embeddings para recuperar contexto relevante.</li>
+            </ul>
+
+            <h3>Breve historia y adopción</h3>
+            <ul>
+                <li>Décadas de investigación en IA desde mediados del siglo XX.</li>
+                <li>Adopción práctica en programación aumenta con asistentes en IDE (≈2021–2022).</li>
+                <li>Uso extendido de LLM y RAG en desarrollo a partir de 2022–2023.</li>
+            </ul>
+
+            <h3>¿Qué más se puede hacer con IA?</h3>
+            <ul>
+                <li>Revisiones de código asistidas con detección de patrones y olores.</li>
+                <li>Generación de guías de API (OpenAPI/Swagger) y ejemplos de clientes.</li>
+                <li>Sugerencias de arquitectura y patrones según requisitos y contexto.</li>
+                <li>Optimización de rendimiento con propuestas de estructuras y algoritmos.</li>
+                <li>Soporte en resolución de bugs con explicación del flujo de ejecución.</li>
+            </ul>
         </section>
     </div>
     
     <footer>
         <p>&copy; 2023 Inteligencia Artificial en Programación | Creado con HTML y CSS</p>
         <p>Este documento incluye ejemplos de caracteres especiales, enlaces, imágenes, fondos, colores, tablas, formularios, mapas y frames.</p>
+        
+        <section id="recursos-extendidos" style="margin-top: 32px;">
+            <h2>Recursos extendidos</h2>
+            <ul>
+                <li><a target="_blank" href="https://developers.google.com/machine-learning/crash-course">ML Crash Course</a> (Google)</li>
+                <li><a target="_blank" href="https://pytorch.org/docs/stable/index.html">PyTorch Docs</a></li>
+                <li><a target="_blank" href="https://www.tensorflow.org/guide">TensorFlow Guide</a></li>
+                <li><a target="_blank" href="https://scikit-learn.org/stable/user_guide.html">scikit-learn User Guide</a></li>
+                <li><a target="_blank" href="https://docs.langchain.com">LangChain Docs</a></li>
+                <li><a target="_blank" href="https://milvus.io/docs">Milvus Vector DB Docs</a></li>
+                <li><a target="_blank" href="https://docs.pinecone.io">Pinecone Docs</a></li>
+                <li><a target="_blank" href="https://faiss.ai/">FAISS</a> (Facebook AI Similarity Search)</li>
+                <li><a target="_blank" href="https://owasp.org/www-project-top-ten/">OWASP Top Ten</a></li>
+                <li><a target="_blank" href="https://semgrep.dev/">Semgrep</a></li>
+            </ul>
+        </section>
+
+       
+
+            </ul>
+        </section>
     </footer>
 </body>
 </html>
-    
-    </style>
-</head>
-<body>
-    <header>
-        <h1>Inteligencia Artificial en la Programación</h1>
         <p>Explorando el impacto y las aplicaciones de la IA en el desarrollo de software</p>
     </header>
 
