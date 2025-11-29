@@ -1146,13 +1146,845 @@ out = generate(prompt, format='code')
         <div class="map-container">
             <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3168.6482351896156!2d-122.17633492392031!3d37.42748597981944!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x808fbb28416493a7%3A0x778a60994d7a5e4c!2sStanford%20University!5e0!3m2!1sen!2sus!4v1682789266880!5m2!1sen!2sus" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
         </div>
+<section class="panel">
+      <div class="section-header"><h2>21. Arquitectura de Agentes</h2></div>
+      <div class="content">
+        <p>Los agentes orquestan tareas de desarrollo: planificación, búsqueda en repositorios, generación de código y validación automática. Se definen roles y herramientas disponibles para cada agente.</p>
+        <table>
+          <thead><tr><th>Agente</th><th>Responsabilidad</th><th>Entrada</th><th>Salida</th></tr></thead>
+          <tbody>
+            <tr><td>Planificador</td><td>Divide tareas</td><td>Objetivo, restricciones</td><td>Subtareas y orden</td></tr>
+            <tr><td>Buscador</td><td>Recupera contexto</td><td>Consulta</td><td>Snippets relevantes</td></tr>
+            <tr><td>Generador</td><td>Produce código</td><td>Especificaciones</td><td>Implementación</td></tr>
+            <tr><td>Verificador</td><td>Ejecuta pruebas</td><td>Suite, métricas</td><td>Resultados y reporte</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
 
+    <section class="panel">
+      <div class="section-header"><h2>22. RAG para Código</h2></div>
+      <div class="content">
+        <p>La recuperación aumentada con generación aporta contexto preciso desde el repositorio: funciones, tipos y convenciones. La calidad depende del chunking y la ventana de contexto.</p>
+        <ul>
+          <li>Segmentación por archivo, clase y función.</li>
+          <li>Índices por ruta y por lenguaje.</li>
+          <li>Relevancia combinando similitud semántica y metadatos.</li>
+        </ul>
+        <pre><code>{
+  "consulta": "validar token JWT en middleware",
+  "fuentes": [
+    {"archivo": "src/auth/middleware.ts", "seccion": "verifyToken"},
+    {"archivo": "src/config/security.ts", "seccion": "jwt"}
+  ],
+  "respuesta": "middleware con verificación de firma y expiración"
+}</code></pre>
+      </div>
+    </section>
+
+    <section class="panel">
+      <div class="section-header"><h2>23. Embeddings de Código</h2></div>
+      <div class="content">
+        <p>Los embeddings representan funciones y archivos en vectores. Permiten búsquedas semánticas y detección de duplicados. Se entrenan con corpora de código y descripciones.</p>
+        <table>
+          <thead><tr><th>Unidad</th><th>Granularidad</th><th>Uso</th><th>Beneficio</th></tr></thead>
+          <tbody>
+            <tr><td>Función</td><td>Líneas 10–100</td><td>Reutilización</td><td>Encuentra implementaciones similares</td></tr>
+            <tr><td>Clase</td><td>200–500</td><td>Navegación</td><td>Contexto de responsabilidades</td></tr>
+            <tr><td>Archivo</td><td>200–2000</td><td>Indexación</td><td>Mapa por módulo</td></tr>
+          </tbody>
+        </table>
+        <pre><code>{
+  "vector": [0.12, -0.84, 0.33],
+  "tag": "validate_email",
+  "lenguaje": "ts",
+  "ruta": "src/utils/validators.ts"
+}</code></pre>
+      </div>
+    </section>
+
+    <section class="panel">
+      <div class="section-header"><h2>24. Recuperación por Árbol</h2></div>
+      <div class="content">
+        <p>La recuperación jerárquica usa información del árbol de directorios para priorizar código cercano al módulo objetivo. Mejora precisión y reduce ruido.</p>
+        <ul>
+          <li>Puntuación por proximidad de ruta.</li>
+          <li>Filtro por lenguaje y extensión.</li>
+          <li>Penalización de archivos generados.</li>
+        </ul>
+        <pre><code>{
+  "ruta": "src/services/user",
+  "preferidos": ["src/services/user/auth.ts", "src/services/user/profile.ts"],
+  "excluir": ["dist", "coverage"]
+}</code></pre>
+      </div>
+    </section>
+
+    <section class="panel">
+      <div class="section-header"><h2>25. Generación de Pruebas de Mutación</h2></div>
+      <div class="content">
+        <p>Las pruebas de mutación introducen cambios pequeños y esperan que las pruebas fallen. La IA sugiere mutantes relevantes para aumentar la sensibilidad de la suite.</p>
+        <table>
+          <thead><tr><th>Mutante</th><th>Tipo</th><th>Efecto</th><th>Detección</th></tr></thead>
+          <tbody>
+            <tr><td>Invertir comparación</td><td>Lógico</td><td>Condición errónea</td><td>Pruebas de límite</td></tr>
+            <tr><td>Eliminar validación</td><td>Control</td><td>Entrada inválida aceptada</td><td>Pruebas negativas</td></tr>
+            <tr><td>Cambiar constante</td><td>Datos</td><td>Resultado incorrecto</td><td>Asserts precisos</td></tr>
+          </tbody>
+        </table>
+        <pre><code>def sumar(a, b):
+    return a + b
+
+def test_sumar():
+    assert sumar(2, 2) == 4
+</code></pre>
+      </div>
+    </section>
+
+    <section class="panel">
+      <div class="section-header"><h2>26. Fuzzing Guiado por IA</h2></div>
+      <div class="content">
+        <p>El fuzzing genera entradas aleatorias enfocadas en rutas críticas. La IA aprende qué entradas descubren fallos con mayor probabilidad.</p>
+        <ul>
+          <li>Exploración basada en cobertura.</li>
+          <li>Priorizar entradas que provocan excepciones.</li>
+          <li>Mezclar datos sintéticos y reales.</li>
+        </ul>
+        <pre><code>function parseJson(s) {
+  try { return JSON.parse(s) } catch(e) { return null }
+}
+
+function casos() {
+  return ["{}", "[]", "\"x\"", "{", "1e9999"]
+}
+</code></pre>
+      </div>
+    </section>
+
+    <section class="panel">
+      <div class="section-header"><h2>27. Performance en Frontend</h2></div>
+      <div class="content">
+        <p>La IA sugiere mejoras de rendimiento: memoización, virtualización y carga diferida. Analiza trazas y genera cambios mínimos.</p>
+        <table>
+          <thead><tr><th>Técnica</th><th>Uso</th><th>Ganancia</th></tr></thead>
+          <tbody>
+            <tr><td>Memoización</td><td>Evitar cálculos repetidos</td><td>Menos renders</td></tr>
+            <tr><td>Virtualización</td><td>Listas grandes</td><td>Menor consumo</td></tr>
+            <tr><td>Lazy loading</td><td>Recursos pesados</td><td>Arranque rápido</td></tr>
+          </tbody>
+        </table>
+        <pre><code>export function sum(a, b) { return a + b }
+
+export function heavy(n) {
+  let s = 0
+  for (let i = 0; i < n; i++) s += i
+  return s
+}
+</code></pre>
+      </div>
+    </section>
+
+    <section class="panel">
+      <div class="section-header"><h2>28. Observabilidad AIOps</h2></div>
+      <div class="content">
+        <p>La observabilidad con IA detecta anomalías en logs y métricas. Prioriza alertas por impacto y sugiere mitigaciones.</p>
+        <ul>
+          <li>Detección de picos y patrones inusuales.</li>
+          <li>Correlación entre errores y deploys.</li>
+          <li>Recomendaciones de rollback y parcheo.</li>
+        </ul>
+        <pre><code>{
+  "errores": 57,
+  "tasa": 0.04,
+  "sugerencia": "revertir versión 1.2.3"
+}</code></pre>
+      </div>
+    </section>
+
+    <section class="panel">
+      <div class="section-header"><h2>29. Costes y Caching</h2></div>
+      <div class="content">
+        <p>La gestión de costes requiere cachear respuestas y compartir contexto. Se normalizan prompts y se controlan tokens.</p>
+        <table>
+          <thead><tr><th>Estrategia</th><th>Descripción</th><th>Impacto</th></tr></thead>
+          <tbody>
+            <tr><td>Cache semántico</td><td>Reutiliza respuestas similares</td><td>Menos llamadas</td></tr>
+            <tr><td>Plantillas</td><td>Prompts consistentes</td><td>Calidad estable</td></tr>
+            <tr><td>Compresión</td><td>Reducir contexto</td><td>Ahorro de tokens</td></tr>
+          </tbody>
+        </table>
+        <pre><code>{
+  "prompt": "generar función ordenar lista",
+  "hash": "c0de123",
+  "cache": true
+}</code></pre>
+      </div>
+    </section>
+
+    <section class="panel">
+      <div class="section-header"><h2>30. Plantillas de Prompts</h2></div>
+      <div class="content">
+        <p>Las plantillas encapsulan buenas prácticas. Incluyen entradas, objetivos y validaciones de salida.</p>
+        <pre><code>Entrada: lenguaje, versión, requisitos
+Objetivo: implementación, complejidad deseada
+Validación: pruebas, límites, rendimiento
+Salida: función, documentación, casos</code></pre>
+        <pre><code>Genera en Go una función que reciba una lista de enteros y devuelva los pares. Complejidad O(n). Incluye pruebas con listas vacías y tamaños grandes.</code></pre>
+      </div>
+    </section>
+
+    <section class="panel">
+      <div class="section-header"><h2>31. Guardrails y Seguridad</h2></div>
+      <div class="content">
+        <p>Los guardrails verifican entradas y salidas: tipos, límites y políticas. Protegen contra generación insegura y filtraciones.</p>
+        <ul>
+          <li>Validación de esquemas y tipos.</li>
+          <li>Filtros de secretos y datos sensibles.</li>
+          <li>Políticas de contenido y ejecución.</li>
+        </ul>
+        <pre><code>{
+  "salida": {"funcion": "procesar"},
+  "validacion": {"tipos": ["string", "number"], "max": 1000}
+}</code></pre>
+      </div>
+    </section>
+
+    <section class="panel">
+      <div class="section-header"><h2>32. CI/CD Asistido</h2></div>
+      <div class="content">
+        <p>La integración continua incorpora análisis semántico del diff, generación de pruebas y documentación automática.</p>
+        <table>
+          <thead><tr><th>Paso</th><th>Acción</th><th>Resultado</th></tr></thead>
+          <tbody>
+            <tr><td>Analizar diff</td><td>Revisión semántica</td><td>Riesgos identificados</td></tr>
+            <tr><td>Generar pruebas</td><td>Casos adicionales</td><td>Mayor cobertura</td></tr>
+            <tr><td>Publicar docs</td><td>Sincronizar cambios</td><td>Docs actualizadas</td></tr>
+          </tbody>
+        </table>
+        <pre><code>steps:
+- ai-diff
+- gen-tests
+- publish-docs
+</code></pre>
+      </div>
+    </section>
+
+    <section class="panel">
+      <div class="section-header"><h2>33. Evaluación de Modelos</h2></div>
+      <div class="content">
+        <p>Se miden capacidades en tareas de programación con suites reproducibles. Métricas clave son exactitud, robustez y coste.</p>
+        <table>
+          <thead><tr><th>Benchmark</th><th>Área</th><th>Métrica</th></tr></thead>
+          <tbody>
+            <tr><td>HumanEval</td><td>Funciones</td><td>pass@k</td></tr>
+            <tr><td>MBPP</td><td>Básicos</td><td>score</td></tr>
+            <tr><td>CodeXGlue</td><td>Múltiples</td><td>conjunto</td></tr>
+          </tbody>
+        </table>
+        <pre><code>{"pass_at_1": 0.74, "pass_at_5": 0.89}</code></pre>
+      </div>
+    </section>
+
+    <section class="panel">
+      <div class="section-header"><h2>34. Desarrollo Móvil Asistido</h2></div>
+      <div class="content">
+        <p>La IA apoya en generación de componentes, navegación y pruebas de UI. Ofrece ejemplos adaptados al framework.</p>
+        <pre><code>import React from 'react'
+import { Text, View } from 'react-native'
+
+export default function App() {
+  return <View><Text>Hola</Text></View>
+}
+</code></pre>
+        <ul>
+          <li>Plantillas por plataforma.</li>
+          <li>Pruebas end-to-end sintetizadas.</li>
+          <li>Optimización de rendimiento en dispositivos.</li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="panel">
+      <div class="section-header"><h2>35. Infraestructura para IA</h2></div>
+      <div class="content">
+        <p>La infraestructura combina contenedores, funciones serverless y colas de tareas. Escala por demanda y controla latencia.</p>
+        <pre><code>services:
+  api:
+    image: app:latest
+  worker:
+    image: worker:latest
+    env:
+      QUEUE: jobs
+</code></pre>
+        <ul>
+          <li>Separación de responsabilidades.</li>
+          <li>Políticas de reintento.</li>
+          <li>Monitoreo de uso de tokens.</li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="panel">
+      <div class="section-header"><h2>36. Datos para Código</h2></div>
+      <div class="content">
+        <p>Los datasets incluyen problemas, soluciones y pruebas. Se curan para evitar ruido y licencias restrictivas.</p>
+        <table>
+          <thead><tr><th>Fuente</th><th>Tipo</th><th>Control</th></tr></thead>
+          <tbody>
+            <tr><td>Repos públicos</td><td>Código</td><td>Filtro de licencias</td></tr>
+            <tr><td>Proyectos internos</td><td>Módulos</td><td>Anonimización</td></tr>
+            <tr><td>Problemas-respuestas</td><td>Pares</td><td>Validación</td></tr>
+          </tbody>
+        </table>
+        <pre><code>{"items": 120000, "tests": 450000}</code></pre>
+      </div>
+    </section>
+
+    <section class="panel">
+      <div class="section-header"><h2>37. Gestión de Migraciones</h2></div>
+      <div class="content">
+        <p>La IA propone rutas de migración: módulos a refactorizar, dependencias críticas y riesgos. Genera planes paso a paso.</p>
+        <ul>
+          <li>Inventario de dependencias.</li>
+          <li>Compatibilidad de versiones.</li>
+          <li>Pruebas de regresión.</li>
+        </ul>
+        <pre><code>{"objetivo": "migrar a framework X", "pasos": 7}</code></pre>
+      </div>
+    </section>
+
+    <section class="panel">
+      <div class="section-header"><h2>38. Refactorización a Patrones</h2></div>
+      <div class="content">
+        <p>Se detectan code smells y se sugieren patrones: Strategy, Factory, Adapter. Se respetan convenciones del proyecto.</p>
+        <pre><code>class Estrategia {
+  ejecutar(x) { return x }
+}
+
+class Contexto {
+  constructor(e) { this.e = e }
+  run(x) { return this.e.ejecutar(x) }
+}
+</code></pre>
+        <ul>
+          <li>API coherente y estable.</li>
+          <li>Documentación generada tras refactor.</li>
+          <li>Métricas de complejidad reducidas.</li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="panel">
+      <div class="section-header"><h2>39. Documentación Ejecutable</h2></div>
+      <div class="content">
+        <p>La documentación incluye ejemplos ejecutables y pruebas vinculadas. Se actualiza automáticamente con los cambios.</p>
+        <pre><code>def mediana(xs):
+    ys = sorted(xs)
+    n = len(ys)
+    if n == 0:
+        return 0
+    if n % 2 == 1:
+        return ys[n//2]
+    return (ys[n//2-1] + ys[n//2]) / 2
+</code></pre>
+        <ul>
+          <li>Sincronización con CI.</li>
+          <li>Resultados reproducibles.</li>
+          <li>Validez garantizada por pruebas.</li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="panel">
+      <div class="section-header"><h2>40. Asistentes en IDE</h2></div>
+      <div class="content">
+        <p>Los asistentes del IDE sugieren código, explican errores y navegan por el repositorio. Respetan estilos y reglas locales.</p>
+        <pre><code>{"accion": "generar función", "lenguaje": "ts", "archivo": "src/utils.ts"}</code></pre>
+        <ul>
+          <li>Integración con atajos.</li>
+          <li>Sugerencias inline.</li>
+          <li>Explicaciones contextuales.</li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="panel">
+      <div class="section-header"><h2>41. Playbooks de Implementación</h2></div>
+      <div class="content">
+        <p>Los playbooks definen pasos estándar para introducir IA en el flujo de trabajo de desarrollo.</p>
+        <pre><code>Inicio
+Evaluación
+Piloto
+Escalado
+Medición</code></pre>
+        <table>
+          <thead><tr><th>Paso</th><th>Acción</th><th>Indicador</th></tr></thead>
+          <tbody>
+            <tr><td>Inicio</td><td>Selección de casos</td><td>Impacto</td></tr>
+            <tr><td>Piloto</td><td>Pruebas controladas</td><td>Resultados</td></tr>
+            <tr><td>Escalado</td><td>Integración amplia</td><td>Productividad</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section class="panel">
+      <div class="section-header"><h2>42. Métricas de Calidad de Código</h2></div>
+      <div class="content">
+        <p>Se rastrean métricas para evaluar mejoras con IA: complejidad ciclomática, duplicación y defectos.</p>
+        <pre><code>{"complejidad": 7, "duplicacion": 0.03, "defectos": 0.9}</code></pre>
+        <table>
+          <thead><tr><th>Métrica</th><th>Descripción</th><th>Meta</th></tr></thead>
+          <tbody>
+            <tr><td>Complejidad</td><td>Rutas de control</td><td>Reducir</td></tr>
+            <tr><td>Duplicación</td><td>Código repetido</td><td>Minimizar</td></tr>
+            <tr><td>Defectos</td><td>Por módulo</td><td>Disminuir</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section class="panel">
+      <div class="section-header"><h2>43. Prompts y Salidas</h2></div>
+      <div class="content">
+        <p>Los ejemplos muestran cómo formular tareas y evaluar resultados sin ambigüedades.</p>
+        <pre><code>Genera en Python una función que ordene una lista de tuplas por el segundo elemento. Devuelve una nueva lista. Incluye pruebas con tuplas repetidas y vacías.</code></pre>
+        <pre><code>def ordenar(xs):
+    return sorted(xs, key=lambda x: x[1])
+
+def test_ordenar_vacio():
+    assert ordenar([]) == []
+</code></pre>
+      </div>
+    </section>
+
+    <section class="panel">
+      <div class="section-header"><h2>44. Trazabilidad</h2></div>
+      <div class="content">
+        <p>La trazabilidad vincula prompts, código generado y validaciones. Permite auditoría y repetibilidad.</p>
+        <pre><code>{
+  "id": "T-123",
+  "prompt": "crear parser CSV",
+  "artefactos": ["parser.py", "tests_parser.py"],
+  "estado": "validado"
+}</code></pre>
+        <ul>
+          <li>Historial de iteraciones.</li>
+          <li>Resultados de pruebas asociados.</li>
+          <li>Decisiones de revisión humana.</li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="panel">
+      <div class="section-header"><h2>45. Despliegue Seguro</h2></div>
+      <div class="content">
+        <p>Las políticas aseguran que el código generado pase por controles de seguridad antes del despliegue.</p>
+        <table>
+          <thead><tr><th>Control</th><th>Herramienta</th><th>Resultado</th></tr></thead>
+          <tbody>
+            <tr><td>Análisis estático</td><td>Linter</td><td>Errores detectados</td></tr>
+            <tr><td>Dependencias</td><td>Scanner</td><td>Vulnerabilidades</td></tr>
+            <tr><td>Secretos</td><td>Detector</td><td>Incidentes</td></tr>
+          </tbody>
+        </table>
+        <pre><code>{"deploy": "aprobado", "riesgo": "bajo"}</code></pre>
+      </div>
+    </section>
+
+    <section class="panel">
+      <div class="section-header"><h2>46. Internacionalización</h2></div>
+      <div class="content">
+        <p>La IA ayuda a localizar interfaces y mensajes, manteniendo coherencia y cobertura de idiomas.</p>
+        <pre><code>{"es": "Guardar", "en": "Save", "fr": "Enregistrer"}</code></pre>
+        <ul>
+          <li>Detección de textos sin traducir.</li>
+          <li>Verificación de longitud y contexto.</li>
+          <li>Integración con gestores de i18n.</li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="panel">
+      <div class="section-header"><h2>47. Revisores por Roles</h2></div>
+      <div class="content">
+        <p>Los revisores virtuales actúan con perspectivas distintas: seguridad, rendimiento y estilo. Suman evaluaciones complementarias.</p>
+        <table>
+          <thead><tr><th>Rol</th><th>Foco</th><th>Severidad</th></tr></thead>
+          <tbody>
+            <tr><td>Seguridad</td><td>Vulnerabilidades</td><td>Alta</td></tr>
+            <tr><td>Rendimiento</td><td>Optimización</td><td>Media</td></tr>
+            <tr><td>Estilo</td><td>Consistencia</td><td>Baja</td></tr>
+          </tbody>
+        </table>
+        <pre><code>{"rol": "seguridad", "issues": 3}</code></pre>
+      </div>
+    </section>
+
+    <section class="panel">
+      <div class="section-header"><h2>48. Tutoría y Aprendizaje</h2></div>
+      <div class="content">
+        <p>La IA guía a estudiantes con explicaciones y ejercicios graduales. Adapta dificultad y feedback.</p>
+        <pre><code>Ejercicio: implementar pila
+Entrada: push, pop, peek
+Salida: estructura funcional
+</code></pre>
+        <ul>
+          <li>Secuencias de aprendizaje.</li>
+          <li>Evaluación continua.</li>
+          <li>Retroalimentación personalizada.</li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="panel">
+      <div class="section-header"><h2>49. Ética Ampliada</h2></div>
+      <div class="content">
+        <p>Se amplían consideraciones: transparencia de modelos, impacto en trabajo y sostenibilidad. Se promueve uso responsable.</p>
+        <ul>
+          <li>Transparencia y explicabilidad.</li>
+          <li>Impacto social y laboral.</li>
+          <li>Sostenibilidad energética.</li>
+        </ul>
+        <pre><code>{"principios": ["equidad", "privacidad", "seguridad"]}</code></pre>
+      </div>
+    </section>
+
+    <section class="panel">
+      <div class="section-header"><h2>50. Conclusiones</h2></div>
+      <div class="content">
+        <p>La IA en programación incrementa productividad y calidad cuando se integra con disciplina: buenas prácticas, validaciones y trazabilidad. Este proyecto sirve como guía y referencia ampliable.</p>
+        <ul>
+          <li>Adopción gradual y medible.</li>
+          <li>Automatización con control humano.</li>
+          <li>Mejora continua del ciclo de vida.</li>
+        </ul>
+      </div>
+    </section>
+
+    <h3>2.1 Aprendizaje Automático</h3>
+          <p>Conjunto de técnicas que permiten a los sistemas aprender patrones a partir de datos.</p>
+          <ul>
+            <li>Supervisado: clasificación, regresión.</li>
+            <li>No supervisado: clustering, reducción de dimensionalidad.</li>
+            <li>Por refuerzo: agentes que optimizan políticas mediante recompensas.</li>
+          </ul>
+        </div>
+        <div>
+          <h3>2.2 Aprendizaje Profundo</h3>
+          <p>Arquitecturas neuronales profundas para representación de alto nivel.</p>
+          <ul>
+            <li>Redes convolucionales (CNN) para visión.</li>
+            <li>Transformers para lenguaje natural.</li>
+            <li>Autoencoders y modelos generativos.</li>
+          </ul>
+        </div>
+        <div>
+          <h3>2.3 Modelos de Lenguaje</h3>
+          <p>Modelos entrenados para comprender y generar texto, útiles en asistencia al desarrollo.</p>
+          <ul>
+            <li>Compleción de código y generación de funciones.</li>
+            <li>Explicación de errores y documentación automática.</li>
+            <li>Refactorización y sugerencias de rendimiento.</li>
+          </ul>
+        </div>
+        <div>
+          <h3>2.4 MLOps</h3>
+          <p>Prácticas para operacionalizar modelos: versionado, despliegue, monitoreo y retraining.</p>
+          <ul>
+            <li>Datasets versionados y trazabilidad.</li>
+            <li>Pipelines reproducibles.</li>
+            <li>Alertas ante deriva de datos y rendimiento.</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section class="panel">
+      <div class="section-header"><h2>3. Casos de Uso en Programación</h2></div>
+      <div class="content">
+        <div class="kpi">
+          <div class="item"><strong>30–50%</strong><div class="sub">Ahorro de tiempo en tareas repetitivas</div></div>
+          <div class="item"><strong>+25%</strong><div class="sub">Mayor cobertura de pruebas automatizadas</div></div>
+          <div class="item"><strong>−20%</strong><div class="sub">Menos errores en producción</div></div>
+          <div class="item"><strong>+15%</strong><div class="sub">Mejor rendimiento del código</div></div>
+        </div>
+        <ul>
+          <li>Generación de código a partir de especificaciones.</li>
+          <li>Detección de bugs y análisis estático mejorado por IA.</li>
+          <li>Creación de pruebas unitarias y de integración.</li>
+          <li>Optimización automática de algoritmos y consultas.</li>
+          <li>Documentación y ejemplos de uso consistentes.</li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="panel">
+      <div class="section-header"><h2>4. Ejemplos de Código Multilenguaje</h2></div>
+      <div class="content">
+        <h3>4.1 Python — Sugerencia de Refactor con IA (conceptual)</h3>
+        <pre><code># ejemplo conceptual de pipeline de análisis
+def calcular_promedio(valores):
+    if not valores:
+        return 0
+    return sum(valores) / len(valores)
+
+# recomendación de IA: manejar tipos, logs y edge cases
+def calcular_promedio_seguro(valores):
+    try:
+        datos = [float(v) for v in valores]
+        return sum(datos) / len(datos) if datos else 0.0
+    except Exception as e:
+        print(f"error: {e}")
+        return 0.0
+</code></pre>
+
+        <h3>4.2 JavaScript — Generación de Pruebas</h3>
+        <pre><code>// función original
+export function isEmail(s) {
+  return /.+@.+\..+/.test(s);
+}
+
+// prueba sugerida por IA
+describe('isEmail', () => {
+  it('valida correos comunes', () => {
+    expect(isEmail('a@b.com')).toBe(true);
+  });
+  it('rechaza sin arroba', () => {
+    expect(isEmail('ab.com')).toBe(false);
+  });
+});
+</code></pre>
+
+        <h3>4.3 SQL — Optimización</h3>
+        <pre><code>-- consulta original
+SELECT * FROM pedidos WHERE cliente_id = 42 ORDER BY fecha DESC;
+
+-- recomendación de IA: índice compuesto
+CREATE INDEX idx_pedidos_cliente_fecha ON pedidos (cliente_id, fecha DESC);
+</code></pre>
+      </div>
+    </section>
+
+    <section class="panel">
+      <div class="section-header"><h2>5. Herramientas y Plataformas</h2></div>
+      <div class="content">
+        <table>
+          <thead>
+            <tr><th>Herramienta</th><th>Tipo</th><th>Uso principal</th><th>Notas</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Copilots</td><td>Asistentes</td><td>Generación de código</td><td>Requiere buenas prácticas de prompts</td></tr>
+            <tr><td>Linters con IA</td><td>Calidad</td><td>Detección de errores</td><td>Mejora análisis estático</td></tr>
+            <tr><td>AutoDoc</td><td>Docs</td><td>Documentación</td><td>Extrae contexto y ejemplos</td></tr>
+            <tr><td>Modelos NLP</td><td>Lenguaje</td><td>Resumen/explicación</td><td>Integrables vía API</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section class="panel">
+      <div class="section-header"><h2>6. Buenas Prácticas</h2></div>
+      <div class="content">
+        <ul>
+          <li>Diseñar prompts claros, con contexto, restricciones y ejemplos.</li>
+          <li>Versionar entradas y salidas generadas por IA.</li>
+          <li>Validar resultados: pruebas y revisión manual.</li>
+          <li>Evitar dependencias opacas; construir pipelines auditables.</li>
+          <li>Respetar privacidad y cumplimiento normativo.</li>
+        </ul>
+        <p class="quote">“La IA bien usada convierte al equipo en un multiplicador de valor.”</p>
+      </div>
+    </section>
+
+    <section class="panel">
+      <div class="section-header"><h2>7. Ética y Riesgos</h2></div>
+      <div class="content">
+        <ul>
+          <li>Sesgos en datos de entrenamiento.</li>
+          <li>Alucinaciones en modelos generativos.</li>
+          <li>Seguridad y exposición involuntaria de información.</li>
+          <li>Dependencia excesiva de herramientas.</li>
+        </ul>
+        <div class="note">Mitigar con revisión humana, auditoría continua y trazabilidad.</div>
+      </div>
+    </section>
+
+    <section class="panel">
+      <div class="section-header"><h2>8. Roadmap de Integración</h2></div>
+      <div class="content">
+        <ol>
+          <li>Identificar tareas repetitivas y de alto impacto.</li>
+          <li>Seleccionar herramientas y definir métricas.</li>
+          <li>Crear pilotos controlados en módulos no críticos.</li>
+          <li>Medir mejoras y ajustar procesos.</li>
+          <li>Escalar gradualmente y documentar aprendizajes.</li>
+        </ol>
+      </div>
+    </section>
+
+    <section class="panel">
+      <div class="section-header"><h2>9. Glosario Breve</h2></div>
+      <div class="content">
+        <ul>
+          <li><strong>Prompt</strong>: instrucción para modelos generativos.</li>
+          <li><strong>MLOps</strong>: operacionalización de modelos.</li>
+          <li><strong>Deriva</strong>: cambio en distribución de datos que afecta rendimiento.</li>
+          <li><strong>Explainability</strong>: interpretabilidad de decisiones del modelo.</li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="panel">
+      <div class="section-header"><h2>10. Referencias</h2></div>
+      <div class="content">
+        <ul>
+          <li>Documentación de frameworks de IA y APIs.</li>
+          <li>Guías de seguridad y cumplimiento.</li>
+          <li>Artículos sobre optimización y calidad de código.</li>
+          <li>Casos de estudio en la industria.</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- Secciones ampliadas para cubrir más áreas de IA en programación -->
+    <section class="panel">
+      <div class="section-header"><h2>11. Arquitecturas Modernas para Código</h2></div>
+      <div class="content">
+        <p>Los modelos de lenguaje adaptados al dominio del código (Code LLM) utilizan preentrenamiento en repositorios públicos y privados, con objetivos como next-token prediction y aprendizaje por refuerzo con retroalimentación humana.</p>
+        <ul>
+          <li>Preentrenamiento con corpus de alto valor y filtrado de licencias.</li>
+          <li>Fine-tuning con datasets de problemas-respuestas y tests.</li>
+          <li>Evaluación con benchmarks como HumanEval y MBPP.</li>
+        </ul>
+        <pre><code># métrica conceptual en evaluación de modelos de código
+human_eval_pass_at_k = 0.78  # proporción de tareas resueltas en top-k
+mbpp_score = 0.71            # tareas de programación básicas resueltas
+</code></pre>
+      </div>
+    </section>
+
+     <section class="panel">
+      <div class="section-header"><h2>17. Integración Continua y Calidad Asistida</h2></div>
+      <div class="content">
+        <ul>
+          <li>Análisis semántico del diff antes del merge.</li>
+          <li>Revisión de estilo y consistencia de APIs.</li>
+          <li>Sugerencias de rollback seguro.</li>
+        </ul>
+        <pre><code># Ejemplo conceptual de pipeline en CI
+steps:
+  - run: lint
+  - run: ai-review --context src/ --rules security,style
+  - run: tests
+</code></pre>
+      </div>
+    </section>
+
+    <section class="panel">
+      <div class="section-header"><h2>18. Datos y Privacidad</h2></div>
+      <div class="content">
+        <p>Gestionar datos sensibles es clave: anonimización, minimización, políticas de retención y cifrado.</p>
+        <div class="note">Usa entornos aislados y evita enviar secretos a servicios externos.</div>
+      </div>
+    </section>
+
+    <section class="panel">
+      <div class="section-header"><h2>19. Métricas de Productividad</h2></div>
+      <div class="content">
+        <table>
+          <thead><tr><th>Métrica</th><th>Descripción</th><th>Objetivo</th></tr></thead>
+          <tbody>
+            <tr><td>Lead time</td><td>Tiempo de idea a producción</td><td>−20%</td></tr>
+            <tr><td>Bug rate</td><td>Errores por release</td><td>−15%</td></tr>
+            <tr><td>Cobertura</td><td>Pruebas unitarias</td><td>+25%</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section class="panel">
+      <div class="section-header"><h2>12. Prompt Engineering para Desarrollo</h2></div>
+      <div class="content">
+        <p>La calidad del prompt determina la utilidad de las respuestas. En programación, estructurar detalle de inputs, restricciones y ejemplos guía al modelo hacia soluciones reproducibles.</p>
+        <ol>
+          <li>Contexto: lenguaje, versiones, librerías.</li>
+          <li>Objetivo: función, API, performance esperado.</li>
+          <li>Restricciones: complejidad, memoria, seguridad.</li>
+          <li>Ejemplos: I/O claros y casos límite.</li>
+        </ol>
+        <pre><code>"Escribe una función en Python 3.11 que calcule mediana.
+Debe aceptar listas grandes (10^6), O(n log n) máximo, sin librerías externas.
+Incluye pruebas unitarias para listas vacías y longitud par/impar."</code></pre>
+      </div>
+    </section>
+
+    <section class="panel">
+      <div class="section-header"><h2>13. IA para Seguridad del Código</h2></div>
+      <div class="content">
+        <p>Modelos pueden sugerir mitigaciones ante vulnerabilidades conocidas (SQLi, XSS, SSRF). Integrar análisis estático tradicional con heurísticas de IA mejora precisión y reduce falsos positivos.</p>
+        <table>
+          <thead><tr><th>Vulnerabilidad</th><th>Lenguaje</th><th>Mitigación sugerida</th></tr></thead>
+          <tbody>
+            <tr><td>SQL Injection</td><td>Python</td><td>Consultas parametrizadas (cursor.execute(sql, params))</td></tr>
+            <tr><td>XSS</td><td>JavaScript</td><td>Escapar salida, Content-Security-Policy</td></tr>
+            <tr><td>SSRF</td><td>Node</td><td>Whitelist de hosts y validación de URLs</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section class="panel">
+      <div class="section-header"><h2>14. Generación de Documentación Técnica</h2></div>
+      <div class="content">
+        <p>La IA puede generar explicaciones de módulos, diagramas de flujo y comentarios, manteniendo sincronización con cambios de código mediante hooks en CI.</p>
+        <pre><code>// Ejemplo de anotación generada
+/**
+ * Procesa pedidos y calcula métricas de cumplimiento.
+ * Entradas: lista de pedidos, reglas de negocio.
+ * Salidas: KPIs agregados y alertas.
+ */
+function procesarPedidos(pedidos, reglas) { /* ... */ }
+</code></pre>
+      </div>
+    </section>
+
+    <section class="panel">
+      <div class="section-header"><h2>15. Pruebas con Cobertura Asistida por IA</h2></div>
+      <div class="content">
+        <p>La IA sugiere casos faltantes y genera datos sintéticos. Se recomienda validar contra oráculos y métricas de mutación.</p>
+        <pre><code># Python: ejemplo de casos añadidos
+def test_division_cero():
+    with pytest.raises(ZeroDivisionError):
+        dividir(10, 0)
+
+def test_division_negativos():
+    assert dividir(-9, 3) == -3
+</code></pre>
+      </div>
+    </section>
+
+    <section class="panel">
+      <div class="section-header"><h2>16. Optimización de Consultas y Algoritmos</h2></div>
+      <div class="content">
+        <p>La IA detecta cuellos de botella y sugiere estructuras de datos o índices adecuados.</p>
+        <pre><code>-- Sugerencia: índice parcial para consultas frecuentes
+CREATE INDEX idx_activos ON usuarios (estado) WHERE estado = 'activo';
+</code></pre>
+      </div>
+    </section>
       
         <h3>Últimas Tendencias en IA para Programación</h3>
         <div class="frame-container">
             <iframe src="https://www.youtube.com/embed/videoseries?list=PL8FnQMH2k7jzhtVYbKmvrMyXDYMmgjj_n" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
         </div>
-
+ <h3>Recursos útiles</h3>
+            <ul>
+                <li>MDN Web Docs: Documentación completa sobre HTML.</li>
+                <li>W3Schools: Tutoriales y referencias de HTML.</li>
+                <li>CodePen: Plataforma para experimentar con HTML, CSS y JavaScript.</li>
+                <li>GitHub: Comparte y colabora en proyectos de código.</li>
+            </ul>
        
         <h3>Recursos Adicionales</h3>
         <ul>
