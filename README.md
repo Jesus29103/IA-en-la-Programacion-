@@ -1,0 +1,51 @@
+[Interactividad_JS_JIMD.html](https://github.com/user-attachments/files/25815237/Interactividad_JS_JIMD.html)
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Programacion Web II</title>    
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+    <style>
+      /* Inicia CSS */  
+      #prepa{
+        border-radius: 100%;
+      }
+
+      /* Termina CSS */ 
+    </style>
+  </head>
+  <body>
+    <!-- Inicia Elementos de HTML-->    
+    <div class="container">
+         <div class="row">
+             <div class="col-lg-4">
+                <img width="50px" src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b9/2023_Facebook_icon.svg/960px-2023_Facebook_icon.svg.png" >
+                <br>
+                <br>
+                <img id= "prepa" width="200px" height="200px" src="https://blob.udgtv.com/images/2023/09/02/auditorio-raul-padilla-focus-0-0-608-342.jpg">
+
+             </div>
+             <div class="col-lg-5">
+                <h1 id="nombreprepa">Prepa San Jose del Valle </h1>
+                <h6>45 seguidores</h6>
+                <h6>0 seguidos</h6>
+                <h6>Alumnos y ex alumnos de la tae de programacion Web</h6>
+             </div>
+             <div class="col-lg-3">
+                <br><br>
+                <button onclick="cambiaDatos()">Editar</button>
+             </div>
+         </div>
+    </div>
+    <!-- Termina Elementos de HTML-->
+  </body>
+  <script>
+      /* Inicia Javascript */  
+      function cambiaDatos (){
+        document.getElementById("nombreprepa").textContent = prompt("que titulo quieres?")
+      }
+      /* Termina Javascript */           
+  </script>
+</html>
